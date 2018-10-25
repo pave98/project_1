@@ -13,8 +13,6 @@
     </div>
 
     <form method="post" action="login.php">
-        <!-- Display validation errors here -->
-        <?php include('errors.php'); ?>
         <div class="input-group">
             <label>Username</label>
             <input type="text" name="username">
