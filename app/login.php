@@ -1,14 +1,6 @@
-<?php include('server.php'); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Registration</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+<?php
+    require "header.php";
+?>
     <div class="header">
         <h2>Login</h2>
     </div>
@@ -31,5 +23,7 @@
             Not yet a member? <a href="register.php">Sign up</a>
         </p>
     </form>
-</body>
-</html>
+
+<?php
+    require "footer.php";
+?>
