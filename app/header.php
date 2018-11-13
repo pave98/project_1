@@ -1,3 +1,4 @@
+<?php include('server.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +16,17 @@
         </header>
         <nav>
             <ul>
-                <li>
-                    <a href="login.php">Login</a>
-                </li>
+            <?php
+                if (empty($_SESSION['username'])) {
+                    print "
+                    <li>
+                        <a href='login.php'>Login</a>
+                    </li>
+                    ";
+                } 
+
+            ?>
+                
                 <li>
                     <a href="javascript:void(0)">Joukkue</a>
                 </li>
