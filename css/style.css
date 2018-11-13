@@ -20,7 +20,7 @@ body {
 
     grid-template-areas:    "header header header"
                             "nav nav nav"
-                            "section section section"
+                            "section1 section1 section1"
                             "footer footer footer";
 }
 
@@ -41,8 +41,6 @@ nav {
 section {
     background-color: green;
     padding: 5px;
-    grid-area: section;
-
 }
 aside {
     background-color: blueviolet;
@@ -81,3 +79,18 @@ nav li a:hover {
     background-color: #111;
 }
 
+.s1 {
+    grid-area: section1;
+}
+.s2 {
+    grid-area: section2;
+
+}
+.s3 {
+    grid-area: section3;
+
+}
+.s4 {
+    grid-area: section4;
+
+}
