@@ -1,4 +1,5 @@
 <?php
+/*
     session_start();
 
     $username = "";
@@ -76,4 +77,5 @@
         unset($_SESSION['username']);
         header('location: login.php');
     }
+    */
 ?>
