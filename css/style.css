@@ -15,6 +15,10 @@ header {
   background-image: lightorange;
   padding: 5px;
 }
+header h1 a {
+  color: black;
+  text-decoration: none;
+}
 
 nav {
   background-color: khaki;

@@ -1,4 +1,4 @@
-<?php include('../app/server.php'); ?>
+<?php include('server.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Projekti1</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="project_1\css\style.css">
+    
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>RKC</h1>
+            <h1><a href="http://localhost/project_1/app/index.php">RKC</a></h1>
         </header>
         <nav>
             <ul>
@@ -20,7 +23,7 @@
                 if (empty($_SESSION['username'])) {
                     print "
                     <li>
-                        <a href='../app/login.php'>Login</a>
+                        <a href='http://localhost/project_1/app/login/'>Login</a>
                     </li>
                     ";
                 } 
