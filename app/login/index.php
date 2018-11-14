@@ -1,14 +1,14 @@
 <?php
-    require "../app/header.php";
+    require "../header.php";
 ?>
     <section>
         <div class="header">
             <h2>Login</h2>
         </div>
 
-        <form method="post" action="../app/login.php">
+        <form method="post" action="login.php">
             <!-- Display validation errors here -->
-            <?php include('../app/errors.php'); ?>
+            <?php include('../errors.php'); ?>
             <div class="input-group">
                 <label>Username</label><br>
                 <input type="text" name="username">
@@ -25,5 +25,5 @@
     
 
 <?php
-    require "../app/footer.php";
+    require "../footer.php";
 ?>
