@@ -4,7 +4,27 @@
 }
 
 body {
+<<<<<<< HEAD
+    background-image: url(https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.container {
+    height: 960px;
+    max-width: 1480px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+
+    grid-template-areas:    "header header header"
+                            "nav nav nav"
+                            "section1 section1 section1"
+                            "footer footer footer";
+=======
   background-color: orange;
+>>>>>>> master
 }
 
 header {
