@@ -78,5 +78,9 @@
         unset($_SESSION['username']);
         header('location: login.php');
     }
+<<<<<<< HEAD
  */
+=======
+    */
+>>>>>>> c631380c7686a320e9ceb9baa8e9540ca0c8a3ce
 ?>
