@@ -1,4 +1,4 @@
-<?php include('server.php'); ?>
+<?php include('../app/server.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +20,10 @@
                 if (empty($_SESSION['username'])) {
                     print "
                     <li>
-                        <a href='login.php'>Login</a>
+                        <a href='../app/login.php'>Login</a>
                     </li>
                     ";
                 } 
-
             ?>
                 
                 <li>
