@@ -16,24 +16,31 @@
     <div class="container">
         <header>
             <h1><a href="http://localhost/project_1/app/index.php">RKC</a></h1>
-        </header>
-        <nav>
-            <ul>
-            <?php
-                if (empty($_SESSION['username'])) {
-                    print "
+            <nav>
+                <ul>
+                <?php
+                    if (empty($_SESSION['username'])) {
+                        print "
+                        <li>
+                            <a href='http://localhost/project_1/app/login/'>Login</a>
+                        </li>
+                        ";
+                    } 
+                ?>
+                    
                     <li>
-                        <a href='http://localhost/project_1/app/login/'>Login</a>
+                        <a href="javascript:void(0)">Joukkue</a>
                     </li>
-                    ";
-                } 
-            ?>
-                
-                <li>
-                    <a href="javascript:void(0)">Joukkue</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">Yhteystiedot</a>
-                </li>
-            </ul>
-        </nav>
+                    <li>
+                        <a href="javascript:void(0)">Yhteystiedot</a>
+                    </li>
+                </ul>
+            </nav>
+            <aside>
+                    <h1>
+                        <a href="http://" target="_blank" rel="noopener noreferrer">Login</a>
+                    </h1>
+            </aside>
+
+        </header>
+        
