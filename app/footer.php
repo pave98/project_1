@@ -1,5 +1,5 @@
     <footer>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie.</p>
+        <p>@Webduo</p>
     </footer>
 </div>
 </body>
