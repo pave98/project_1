@@ -15,20 +15,24 @@
 <body>
     <div class="container">
         <header>
-            <h1><a href="http://localhost/project_1/app/index.php">RKC</a></h1>
+            <div class="logo">
+                <a href='http://localhost/project_1/app/index.php'>
+                    <img src='http://localhost/project_1/app/images/logo.png' alt='RKC logo'>
+                </a>
+            </div>
             <nav>
                 <ul>
-                    <li>
-                        <a href='../app/index.php'>Etusivu</a>
+                    <li><!--asfjo-->
+                        <a href='http://localhost/project_1/app/index.php'>Etusivu</a>
                     </li>
                     <li>
-                        <a href='../app/joukkue/index.php'>Joukkue</a>
+                        <a href='http://localhost/project_1/app/joukkue/index.php'>Joukkue</a>
                     </li>
                     <li>
-                        <a href='../app/galleria/index.php'>Galleria</a>
+                        <a href=http://localhost/project_1/app/galleria/index.php>Galleria</a>
                     </li>
                     <li>
-                        <a href='../app/yhteystiedot/index.php'>Yhteystiedot</a>
+                        <a href=http://localhost/project_1/app/yhteystiedot/index.php>Yhteystiedot</a>
                     </li>
                     <?php if(!empty($_SESSION['user'])){
                         print "
