@@ -1,12 +1,10 @@
 <?php
-    require "header.php";
+    require "../header.php";
 ?>
     <section class="s1">
-        <h1>mOI</h1>
-        <h1>Perkelel</h1>
-
+        <h1>Galleria</h1>
+        <p>Kuvia salskeista nuorista pojista</p>
     </section>
-    
 <?php
-    require "footer.php";
+    require "../footer.php";
 ?>
