@@ -1,3 +1,4 @@
+<<<<<<< refs/remotes/origin/master
 /*
 Error: Invalid mixin "======".
         on line 6 of C:\wamp64\www\project_1\css\style.sass
@@ -36,3 +37,121 @@ body:before {
   white-space: pre;
   font-family: monospace;
   content: "Error: Invalid mixin \"======\".\A         on line 6 of C:\wamp64\www\project_1\css\style.sass\A \A 1: \A 2: *\A 3:     box-sizing: border-box\A 4:     color: white\A 5: <<<<<<< refs/remotes/origin/master\A 6: =======\A 7: \A 8: >>>>>>> vitun nastaa\A 9: \A 10: body\A 11:     background-image: url(\"http://localhost/project_1/app/images/background.jpg\")"; }
+=======
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: white;
+}
+
+body {
+  background-image: url("http://localhost/project_1/app/images/background.jpg");
+  background-size: 100%;
+}
+
+header {
+  width: 100%;
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 200px;
+  grid-template-areas: "logo nav login";
+  color: white;
+  padding: 5px;
+}
+header h1 {
+  grid-area: logo;
+}
+header h1 a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+header nav {
+  grid-area: nav;
+}
+header aside {
+  grid-area: login;
+}
+header img {
+  max-height: 200px;
+  max-width: 200px;
+}
+
+section {
+  height: 700px;
+  padding: 5px;
+  text-color: white;
+  text-align: center;
+}
+section h1 {
+  font-size: 100px;
+}
+
+aside {
+  padding: 5px;
+}
+
+footer {
+  background-color: magenta;
+  padding: 5px;
+  grid-area: footer;
+}
+
+nav ul {
+  list-style-type: none;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  padding: 5px;
+}
+nav li {
+  float: left;
+}
+nav li a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+nav li a:hover {
+  background-color: #555;
+  color: white;
+}
+
+.s1 {
+  grid-area: section1;
+}
+
+.container {
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: minmax(-webkit-min-content, -webkit-max-content);
+  grid-template-rows: minmax(min-content, max-content);
+  grid-template-columns: 1fr;
+  grid-template-areas: "header" "section1" "footer";
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 0;
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .container {
+    height: auto;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .container {
+    height: auto;
+    margin: 0 auto;
+  }
+}
+>>>>>>> ad
