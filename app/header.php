@@ -19,21 +19,21 @@
             <nav>
                 <ul>
                     <li>
-                        <a href='../app/index'>Etusivu</a>
+                        <a href='../app/index.php'>Etusivu</a>
                     </li>
                     <li>
-                        <a href='../app/joukkue/index'>Joukkue</a>
+                        <a href='../app/joukkue/index.php'>Joukkue</a>
                     </li>
                     <li>
-                        <a href='../app/galleria/index'>Galleria</a>
+                        <a href='../app/galleria/index.php'>Galleria</a>
                     </li>
                     <li>
-                        <a href='../app/yhteystiedot/index'>Yhteystiedot</a>
+                        <a href='../app/yhteystiedot/index.php'>Yhteystiedot</a>
                     </li>
                     <?php if(!empty($_SESSION['user'])){
                         print "
                         <li>
-                            <a href='http://localhost/project_1/app/nimenhuuto/index'>Nimenhuuto</a>
+                            <a href='http://localhost/project_1/app/nimenhuuto/index.php'>Nimenhuuto</a>
                         </li>";
                     };
                     ?>
