@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Projekti1</title>
+    <title>RKC-Volley</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="project_1\css\style.css">
@@ -18,22 +18,25 @@
             <h1><a href="http://localhost/project_1/app/index.php">RKC</a></h1>
             <nav>
                 <ul>
-                <?php
-                    if (empty($_SESSION['username'])) {
+                    <li>
+                        <a href='../app/index.php'>Etusivu</a>
+                    </li>
+                    <li>
+                        <a href='../app/joukkue/index.php'>Joukkue</a>
+                    </li>
+                    <li>
+                        <a href='../app/galleria/index.php'>Galleria</a>
+                    </li>
+                    <li>
+                        <a href='../app/yhteystiedot/index.php'>Yhteystiedot</a>
+                    </li>
+                    <?php if(!empty($_SESSION['user'])){
                         print "
                         <li>
-                            <a href='http://localhost/project_1/app/login/'>Login</a>
-                        </li>
-                        ";
-                    } 
-                ?>
-                    
-                    <li>
-                        <a href="javascript:void(0)">Joukkue</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">Yhteystiedot</a>
-                    </li>
+                            <a href='http://localhost/project_1/app/nimenhuuto/index.php'>Nimenhuuto</a>
+                        </li>";
+                    };
+                    ?>
                 </ul>
             </nav>
             <aside>
