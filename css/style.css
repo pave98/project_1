@@ -42,15 +42,9 @@ section {
   height: 650px;
   padding: 5px;
   text-color: white;
-<<<<<<< Updated upstream
-}
-section h1 {
-  text-align: center;
-=======
   text-align: center;
 }
 section h1 {
->>>>>>> Stashed changes
   font-size: 100px;
 }
 
