@@ -1,9 +1,11 @@
 
 *
     box-sizing: border-box
+    color: white
+    border: 1px solid red
 
 body
-    background-image: url("http://localhost/project_1/app/images/bgimg.jpg")
+    background-image: url("http://localhost/project_1/app/images/background.jpg")
     background-size: 100%
 
 header
@@ -11,7 +13,7 @@ header
     grid-area: header
     display: grid
     grid-template-columns: 1fr 3fr 1fr
-    grid-template-rows: 100px
+    grid-template-rows: 200px
     grid-template-areas: "logo nav login"
     color: white
     padding: 5px
@@ -19,7 +21,7 @@ header
     h1
         grid-area: logo
         a
-            color: black
+            color: white
             text-decoration: none
             font-size: 20px
 
@@ -28,10 +30,12 @@ header
     aside
         grid-area: login
     img 
-        max-height: 100px
-        max-width: 100px
+        max-height: 200px
+        max-width: 200px
 section
+    height: 700px
     padding: 5px
+    text-color: white
 
 aside
     padding: 5px
