@@ -75,6 +75,7 @@ nav li a:hover {
 
 .s1 {
   grid-area: section1;
+  color: white;
 }
 
 .container {
