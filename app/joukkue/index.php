@@ -3,8 +3,13 @@
 ?>
     <section class="s1">
         <h1>Joukkue</h1>
-        <p>Joukko salskeita nuoria poikia.</p>
 
+        <?php 
+            include_once "player.php";
+            foreach($players as $value){
+                $value->printStats();
+            }
+        ?>
     </section>
     
 <?php

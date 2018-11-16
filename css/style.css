@@ -18,6 +18,7 @@ header {
   grid-template-areas: "logo nav login";
   color: white;
   padding: 5px;
+  background-color: orange;
 }
 header h1 {
   grid-area: logo;
@@ -29,6 +30,7 @@ header h1 a {
 }
 header nav {
   grid-area: nav;
+  font-size: 25px;
 }
 header aside {
   grid-area: login;
@@ -39,13 +41,25 @@ header img {
 }
 
 section {
-  height: 700px;
+  min-height: 650px;
   padding: 5px;
-  text-color: white;
-  text-align: center;
+  text-color: black;
+  background-color: orange;
 }
 section h1 {
+  font-size: 80px;
+}
+section .motto {
+  text-align: center;
   font-size: 100px;
+}
+
+.player {
+  text-align: left;
+  font-size: 25px;
+}
+.player h1 {
+  font-size: 60px;
 }
 
 aside {
@@ -85,7 +99,7 @@ nav li a:hover {
 }
 
 .container {
-  height: auto;
+  height: 100%;
   width: 100%;
   margin: 0 auto;
   display: grid;
