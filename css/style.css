@@ -43,7 +43,16 @@ header img {
 section {
   height: 650px;
   padding: 5px;
-  text-color: white; }
+  text-color: black;
+  background-color: orange;
+}
+section h1 {
+  font-size: 80px;
+}
+section .motto {
+  text-align: center;
+  font-size: 100px;
+}
 
 .player {
   text-align: left;
