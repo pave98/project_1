@@ -18,6 +18,7 @@ header {
   grid-template-areas: "logo nav login";
   color: white;
   padding: 5px;
+  background-color: orange;
 }
 header h1 {
   grid-area: logo;
@@ -29,6 +30,7 @@ header h1 a {
 }
 header nav {
   grid-area: nav;
+  font-size: 25px;
 }
 header aside {
   grid-area: login;
@@ -41,17 +43,23 @@ header img {
 section {
   height: 650px;
   padding: 5px;
-  text-color: white;
-<<<<<<< Updated upstream
+  text-color: black;
+  background-color: orange;
 }
 section h1 {
-  text-align: center;
-=======
-  text-align: center;
+  font-size: 80px;
 }
-section h1 {
->>>>>>> Stashed changes
+section .motto {
+  text-align: center;
   font-size: 100px;
+}
+
+.player {
+  text-align: left;
+  font-size: 25px;
+}
+.player h1 {
+  font-size: 60px;
 }
 
 aside {
