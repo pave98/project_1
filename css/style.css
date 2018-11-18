@@ -2,6 +2,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: white;
+  border: 1px solid red;
 }
 
 body {
@@ -18,7 +19,7 @@ header {
   grid-template-areas: "logo nav login";
   color: white;
   padding: 5px;
-  background-color: orange;
+  background-color: rgba(255, 165, 0, 0.7);
 }
 header h1 {
   grid-area: logo;
@@ -37,14 +38,14 @@ header aside {
 }
 header img {
   max-height: 200px;
-  max-width: 200px;
+  width: auto;
 }
 
 section {
   min-height: 650px;
   padding: 5px;
   text-color: black;
-  background-color: orange;
+  background-color: rgba(255, 165, 0, 0.7);
 }
 section h1 {
   font-size: 80px;
@@ -54,9 +55,16 @@ section .motto {
   font-size: 100px;
 }
 
+.players {
+  margin-top: -65px;
+}
+
 .player {
+  float: left;
+  height: auto;
   text-align: left;
   font-size: 25px;
+  margin: 20px 0px 20px 50px;
 }
 .player h1 {
   font-size: 60px;
