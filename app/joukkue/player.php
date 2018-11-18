@@ -52,15 +52,18 @@
         function getPosition(){
             return $this->position;
         }
-        function printStats(){
-            print"<div class= 'player'>";
+        function printHead(){
             print'<h1> #'.$this->getNumber().' '.$this->getLname().'</h1>';
+        }
+        function printPic(){
             print"<img src='http://localhost/project_1/app/images/grozersmol.jpg' alt='grözer'><br>";
+        }
+        function printStats(){
             print "Nimi: ".$this->getFname()." ".$this->getLname()."<br>";
             print "Pituus: ".$this->getHeight()."<br>";
             print "Ulottuvuus: ".$this->getReach()."<br>";
             print "Pelipaikka: ".$this->getPosition()."<br>";
-            print"</div>";
+            
         }
     }
     $keinonen = new Player("1", "Niko", "Hienonen(C)", "183", "300", "Hakkuri/Yleispelaaja");
