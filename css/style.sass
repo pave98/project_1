@@ -4,6 +4,7 @@
     color: white
     border: 1px solid red
 
+
 body
     background-image: url("http://localhost/project_1/app/images/background.jpg")
     background-size: 100%
@@ -17,6 +18,7 @@ header
     grid-template-areas: "logo nav login"
     color: white
     padding: 5px
+    background-color: rgba(255, 165, 0, .7)
 
     h1
         grid-area: logo
@@ -27,15 +29,38 @@ header
 
     nav
         grid-area: nav
+        font-size: 25px
     aside
         grid-area: login
     img 
         max-height: 200px
-        max-width: 200px
+        width: auto
 section
-    height: 700px
+    min-height: 650px
     padding: 5px
-    text-color: white
+    text-color: black
+    background-color: rgba(255, 165, 0, .7)
+
+    h1  
+        font-size: 80px
+
+    .motto
+        text-align: center
+        font-size: 100px
+
+.players
+    margin-top: -65px
+
+.player
+    float: left
+    height: auto
+    text-align: left
+    font-size: 25px
+    margin: 20px 0px 20px 50px
+
+    h1  
+        font-size: 60px
+    
 
 aside
     padding: 5px
@@ -72,7 +97,7 @@ nav
 
 .container
     
-    height: auto
+    height: 100%
     width: 100%
     margin: 0 auto
     display: grid

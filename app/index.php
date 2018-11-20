@@ -2,8 +2,7 @@
     require "header.php";
 ?>
     <section class="s1">
-        <h1>mOI</h1>
-        <h1>Perkelel</h1>
+        <h1 class="motto">Yhdessä Runkulla</h1>
 
     </section>
     
