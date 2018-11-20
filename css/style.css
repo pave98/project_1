@@ -2,7 +2,6 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: white;
-  border: 1px solid red;
 }
 
 body {
@@ -44,7 +43,6 @@ header img {
 section {
   min-height: 650px;
   padding: 5px;
-  text-color: black;
   background-color: rgba(255, 165, 0, 0.7);
 }
 section h1 {
@@ -118,7 +116,10 @@ nav li a:hover {
   grid-template-areas: "header" "section1" "footer";
 }
 
-input {
+form div label {
+  color: black;
+}
+form div input, form div select, form div textarea {
   color: black;
 }
 
