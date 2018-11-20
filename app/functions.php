@@ -5,9 +5,12 @@ session_start();
 $db = mysqli_connect('localhost', 'root', 'mapatu9598', 'rkc');
 
 // variable declaration
-$username = "";
-$email    = "";
-$errors   = array(); 
+$username 	  = "";
+$email   	  = "";
+$firstname 	  = "";
+$lastname 	  = "";
+$description  = "";
+$errors  	  = array(); 
 
 // call the register() function if register_btn is clicked
 if (isset($_POST['register_btn'])) {
@@ -157,7 +160,7 @@ function login(){
 
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['success']  = "You are now logged in";
-				header('location: ../admin/index.php');		  
+				header('location: ../../admin/index.php');		  
 			}else{
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['success']  = "You are now logged in";
