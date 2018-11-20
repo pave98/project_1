@@ -1,6 +1,6 @@
 
 <?php
-/*
+
     session_start();
 
     $username = "";
@@ -9,7 +9,7 @@
 
 
     // Connect to the database
-    $db = mysqli_connect('localhost','root','mapatu9598','registration');
+    $db = mysqli_connect('localhost','root','mapatu9598','rkc');
 
     //if the registration button is clicked
     if(ISSET($_POST['register'])) {
@@ -17,6 +17,9 @@
         $email = mysqli_real_escape_string($db, $_POST['email']);
         $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
         $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+        $firstname = mysqli_real_escape_string($db, $_POST['firstname']);
+        $lastname = mysqli_real_escape_string($db, $_POST['lastname']);
+        $description = mysqli_real_escape_string($db, $_POST['description']);
 
         // ensure that form fields are filled properly
         if(empty($username)) {
@@ -31,11 +34,19 @@
         if($password_1 != $password_2) {
             array_push($errors, "The two passwords don't match");
         }
-
+        if(empty($firstname)) {
+            array_push($errors, "First name is required"); // add error to errors array
+        }
+        if(empty($lastname)) {
+            array_push($errors, "Last name is required"); // add error to errors array
+        }
+        if(empty($description)) {
+            array_push($errors, "Description is required"); // add error to errors array
+        }
         // if there are no errors, save user to database
         if(count($errors) == 0) {
             $password = md5($password_1); // encrypt password before storing in database (security)
-            $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+            $sql = "INSERT INTO users (username, password, email, firstName, lastName, description) VALUES ('$username', '$password', '$email', '$firstname', '$lastname', '$description')";
             mysqli_query($db, $sql);
             $_SESSION['username'] = $username;
             $_SESSION['success'] = "You are now logged in";
@@ -76,7 +87,7 @@
     if (isset($_GET['logout'])) {
         session_destroy();
         unset($_SESSION['username']);
-        header('location: login.php');
+        header('location: index.php');
     }
- */
+ 
 ?>

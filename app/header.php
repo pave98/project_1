@@ -1,4 +1,4 @@
-    <?php include('server.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/server.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +7,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RKC-Volley</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="project_1\css\style.css">
+    <link rel="stylesheet" href="http://localhost/project_1\css\style.css">
     
 </head>
 <body>
@@ -34,18 +32,30 @@
                     <li>
                         <a href=http://localhost/project_1/app/yhteystiedot/index.php>Yhteystiedot</a>
                     </li>
-                    <?php if(!empty($_SESSION['user'])){
-                        print "
-                        <li>
-                            <a href='http://localhost/project_1/app/nimenhuuto/index.php'>Nimenhuuto</a>
-                        </li>";
-                    };
+                    <?php 
+                        if(!empty($_SESSION['username'])){
+                            print "
+                            <li>
+                                <a href='http://localhost/project_1/app/nimenhuuto/index.php'>Nimenhuuto</a>
+                            </li>";
+                        };
                     ?>
                 </ul>
             </nav>
             <aside>
                     <h1>
-                        <a href="http://" target="_blank" rel="noopener noreferrer">Login</a>
+                        <?php 
+                            if(empty($_SESSION['username'])){
+                                print "
+                                    <a href='http://localhost/project_1/app/login'>Login</a>
+                                    ";
+                            } else {
+                                print   "
+                                        <a href=\"http://localhost/project_1/app/login/index.php?logout='1'\">Logout</a>
+                                        ";     
+                            }
+                        ?>
+                        
                     </h1>
             </aside>
 
