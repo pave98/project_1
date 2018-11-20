@@ -1,12 +1,12 @@
 <?php
-    require "../header.php";
+    include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/header.php'); 
 ?>
     <section>
         <div class="header">
             <h2>Login</h2>
         </div>
 
-        <form method="post" action="login.php">
+        <form method="post" action="http://localhost/project_1/app/index.php">
             <!-- Display validation errors here -->
             <?php include('../errors.php'); ?>
             <div class="input-group">
@@ -25,5 +25,5 @@
     
 
 <?php
-    require "../footer.php";
+    include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/footer.php'); 
 ?>
