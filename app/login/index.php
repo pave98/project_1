@@ -6,9 +6,10 @@
             <h2>Login</h2>
         </div>
 
-        <form method="post" action="http://localhost/project_1/app/index.php">
+        <form method="post" action="index.php">
             <!-- Display validation errors here -->
-            <?php include('../errors.php'); ?>
+            <?php echo display_error(); ?>
+
             <div class="input-group">
                 <label>Username</label><br>
                 <input type="text" name="username">
@@ -18,7 +19,7 @@
                 <input type="password" name="password"><br><br>
             </div>
             <div class="input-group">
-                <button type="submit" name="login" class="btn">Login</button>
+                <button type="submit" name="login_btn" class="btn">Login</button>
             </div>
         </form>
     </section>
