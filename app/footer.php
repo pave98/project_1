@@ -1,3 +1,6 @@
+<?php
+
+    print <<<EOF
     <footer>
         <div class="tag">
             <p>@Webduo</p>
@@ -7,3 +10,6 @@
 </div>
 </body>
 </html>
+EOF;
+
+?>
