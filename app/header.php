@@ -1,4 +1,4 @@
-    <?php include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/server.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/functions.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +33,16 @@
                         <a href=http://localhost/project_1/app/yhteystiedot/index.php>Yhteystiedot</a>
                     </li>
                     <?php 
-                        if(!empty($_SESSION['username'])){
+                        if(!empty($_SESSION['user'])){
                             print "
                             <li>
                                 <a href='http://localhost/project_1/app/nimenhuuto/index.php'>Nimenhuuto</a>
+                            </li>";
+                        };
+                        if(isAdmin()){
+                            print "
+                            <li>
+                                <a href='http://localhost/project_1/admin/index.php'>Admin</a>
                             </li>";
                         };
                     ?>
@@ -45,13 +51,13 @@
             <aside>
                     <h1>
                         <?php 
-                            if(empty($_SESSION['username'])){
+                            if(empty($_SESSION['user'])){
                                 print "
                                     <a href='http://localhost/project_1/app/login'>Login</a>
                                     ";
                             } else {
                                 print   "
-                                        <a href=\"http://localhost/project_1/app/login/index.php?logout='1'\">Logout</a>
+                                        <a href=\"http://localhost/project_1/app/index.php?logout='1'\">Logout</a>
                                         ";     
                             }
                         ?>
