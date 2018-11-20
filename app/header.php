@@ -8,7 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RKC-Volley</title>
     <link rel="stylesheet" href="http://localhost/project_1\css\style.css">
-    
+    <link rel="shortcut icon" href="http://localhost/project_1/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+        window.addEventListener("load", ()=>{
+            
+        });
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -18,11 +26,15 @@
                     <img src='http://localhost/project_1/app/images/logo.png' alt='RKC logo'>
                 </a>
             </div>
+            
+
             <nav>
+                
                 <ul>
-                    <li><!--asfjo-->
+                    <li>
                         <a href='http://localhost/project_1/app/index.php'>Etusivu</a>
                     </li>
+                    
                     <li>
                         <a href='http://localhost/project_1/app/joukkue/index.php'>Joukkue</a>
                     </li>
@@ -46,10 +58,7 @@
                             </li>";
                         };
                     ?>
-                </ul>
-            </nav>
-            <aside>
-                    <h1>
+                    <li>
                         <?php 
                             if(empty($_SESSION['user'])){
                                 print "
@@ -61,9 +70,8 @@
                                         ";     
                             }
                         ?>
-                        
-                    </h1>
-            </aside>
-
+                    </li>
+                </ul>
+            </nav>
         </header>
         

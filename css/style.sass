@@ -14,7 +14,7 @@ header
     display: grid
     grid-template-columns: 1fr 3fr 1fr
     grid-template-rows: 200px
-    grid-template-areas: "logo nav login"
+    grid-template-areas: "logo nav nav"
     color: white
     padding: 5px
     background-color: rgba(255, 165, 0, .7)
@@ -29,11 +29,17 @@ header
     nav
         grid-area: nav
         font-size: 25px
-    aside
-        grid-area: login
+        margin-top: 50px
+        ul
+            float: right
+        li
+            display: inline
+
     img 
         max-height: 200px
         width: auto
+
+
 section
     min-height: 650px
     padding: 5px
@@ -64,9 +70,14 @@ aside
     padding: 5px
 
 footer
-    background-color: magenta
+    background-color: lightgray
     padding: 5px
     grid-area: footer
+    .tag
+        width: 100px
+        margin: 0 auto
+    *
+        color: black
 
 nav
     ul
@@ -103,6 +114,10 @@ nav
     grid-template-columns: 1fr
     grid-template-areas:    "header""section1""footer"
 
+.userList
+    width: 33%
+    margin: 0 auto
+
 form
     div
         label
@@ -114,7 +129,7 @@ form
     body 
         margin: 0
         width: 100%
-
+    
 @media only screen and (min-width : 600px)
     .container
         height: auto

@@ -188,3 +188,20 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['user']);
     header('location: ../app/index.php');
 }
+
+function printUsers() {
+	global $db;
+    $query2="SELECT * FROM users";
+	$result = mysqli_query($db, $query2);
+
+	print "<div class='userList'>";
+		print "<h2>Käyttäjälista</h2>";
+		print "<h3>";
+		while($row = mysqli_fetch_array($result)){
+			print "<p>".$row['firstName']."</p>";
+		}
+		print "</h3>";
+	print "</div>";
+}
+
+?>
