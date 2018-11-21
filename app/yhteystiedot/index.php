@@ -3,7 +3,9 @@
 ?>
     <section class="s1">
         <h1>Yhteystiedot</h1>
-        <p>Antti Koskisen kotiosoite</p>
+        <p class="contact">(kännykä icon): +358 45 6313 113<br>
+            (maili icon) antti.a.koskinen@gmail.com 
+        </p>
 
     </section>
     
