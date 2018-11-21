@@ -2,7 +2,6 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: white;
-  /*border: 1px solid red */
 }
 
 body {
@@ -16,7 +15,7 @@ header {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 200px;
-  grid-template-areas: "logo nav login";
+  grid-template-areas: "logo nav nav";
   color: white;
   padding: 5px;
   background-color: rgba(255, 165, 0, 0.7);
@@ -32,9 +31,13 @@ header h1 a {
 header nav {
   grid-area: nav;
   font-size: 25px;
+  margin-top: 50px;
 }
-header aside {
-  grid-area: login;
+header nav ul {
+  float: right;
+}
+header nav li {
+  display: inline;
 }
 header img {
   max-height: 200px;
@@ -44,7 +47,6 @@ header img {
 section {
   min-height: 650px;
   padding: 5px;
-  text-color: black;
   background-color: rgba(255, 165, 0, 0.7);
   text-align: center;
 }
@@ -83,9 +85,16 @@ aside {
 }
 
 footer {
-  background-color: magenta;
+  background-color: lightgray;
   padding: 5px;
   grid-area: footer;
+}
+footer .tag {
+  width: 100px;
+  margin: 0 auto;
+}
+footer * {
+  color: black;
 }
 
 nav ul {
@@ -112,6 +121,7 @@ nav li a:hover {
 
 .s1 {
   grid-area: section1;
+  color: white;
 }
 
 .container {
@@ -123,6 +133,18 @@ nav li a:hover {
   grid-template-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr;
   grid-template-areas: "header" "section1" "footer";
+}
+
+.userList {
+  width: 33%;
+  margin: 0 auto;
+}
+
+form div label {
+  color: black;
+}
+form div input, form div select, form div textarea {
+  color: black;
 }
 
 @media only screen and (max-width: 600px) {
