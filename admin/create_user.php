@@ -51,7 +51,7 @@
                 <input type="textarea" name="description" value="<?php echo $description; ?>">
             </div>
             <div class="input-group">
-                <button type="submit" class="btn" name="register_btn"> + Create user</button>
+                <button type="submit" class="btn" name="register_btn"> Create user</button>
             </div>
         </form>
     </section>
