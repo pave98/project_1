@@ -68,6 +68,9 @@
                             } else {
                                 print   "
                                         <a href=\"http://localhost/project_1/app/index.php?logout='1'\">Logout</a>
+                                        <li>
+                                            <a href='http://localhost/project_1/app/passwordReset/'>Reset</a>
+                                        </li>
                                         ";     
                             }
                         ?>

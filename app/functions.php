@@ -204,4 +204,45 @@ function printUsers() {
 	print "</div>";
 }
 
+if (isset($_POST['reset_btn'])) {
+	resetPassword();
+}
+
+function resetPassword() {
+	global $db, $username, $errors;
+
+	$oldPassword = e($_POST['oldPassword']);
+	$newPassword = e($_POST['newPassword']);
+	$newPassword2 = e($_POST['newPassword2']);
+
+	// make sure form is filled properly
+	if (empty($oldPassword)) {
+		array_push($errors, "Old password is required");
+	}
+	if (empty($newPassword)) {
+		array_push($errors, "New password is required");
+	}
+	if (empty($newPassword2)) {
+		array_push($errors, "New password repeated is required");
+	}
+	if ($newPassword != $newPassword2) {
+		array_push($errors, "The two new passwords do not match");
+	}
+	
+	if (count($errors) == 0) {
+		
+		$oldPassword = md5($oldPassword);
+
+		if($_SESSION['user']['password'] == $oldPassword) {
+			$newPassword = md5($newPassword);
+			$username = $_SESSION['user']['username'];
+			$query = "UPDATE users SET password='$newPassword' WHERE username='$username'";
+			$updateQuery = mysqli_query($db, $query);
+			$_SESSION['user']['password'] = $newPassword;
+		} else {
+			array_push($errors, "Wrong password");
+		}
+	}
+}
+
 ?>
