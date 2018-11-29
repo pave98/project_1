@@ -5,12 +5,15 @@ session_start();
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
 // variable declaration
-$username 	  = "";
-$email   	  = "";
-$firstname 	  = "";
-$lastname 	  = "";
-$description  = "";
-$errors  	  = array(); 
+$username 	  	= "";
+$email   	  	= "";
+$firstname 	  	= "";
+$lastname 	  	= "";
+$description    = "";
+$eventType		= "";
+$location		= "";
+$time			= "";
+$errors  		= array(); 
 
 // call the register() function if register_btn is clicked
 if (isset($_POST['register_btn'])) {
@@ -244,5 +247,44 @@ function resetPassword() {
 		}
 	}
 }
+
+if (isset($_POST['createEvent_btn'])) {
+	createEvent();
+}
+
+
+function createEvent(){
+	// call these variables with the global keyword to make them available in function
+	global $db, $errors;
+
+	// receive all input values from the form. Call the e() function
+    // defined below to escape form values
+	$eventType    =  e($_POST['eventType']);
+	$description  =  e($_POST['description']);
+	$location	  =  e($_POST['location']);
+    $time 		  =  e($_POST['time']);
+
+	// form validation: ensure that the form is correctly filled
+	if (empty($eventType)) { 
+		array_push($errors, "Event type is required"); 
+	}
+	if (empty($description)) { 
+		array_push($errors, "Description is required"); 
+	}
+	if (empty($location)) { 
+		array_push($errors, "Location is required"); 
+	}
+    if(empty($time)) {
+        array_push($errors, "Time is required"); // 
+    }
+
+	// register user if there are no errors in the form
+	if (count($errors) == 0) {
+		$query = "INSERT INTO events (eventType, description, location, time) 
+					VALUES('$eventType', '$description', '$location', '$time')";
+		mysqli_query($db, $query);				
+	}
+}
+
 
 ?>
