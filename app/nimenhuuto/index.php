@@ -7,7 +7,7 @@
     }
 ?>
     <section>
-        <h1>mOI</h1>
+        <?php printEvents() ?>
     </section>
 <?php
     require "../footer.php";

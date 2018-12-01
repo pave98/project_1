@@ -286,5 +286,26 @@ function createEvent(){
 	}
 }
 
-
+function printEvents() {
+	global $db;
+    $query2="SELECT * FROM events";
+	$result = mysqli_query($db, $query2);
+	
+	print "<div class='eventList'>";
+		print "<h1>Tapahtumat</h1>";
+		while($row = mysqli_fetch_assoc($result)) {
+			$num = 0;
+			print "<div class=eventItem>";
+			foreach($row as $ding) {
+				
+				print "<div class=event".$num.">";
+				print "<p>".$ding."</p>";
+				print "</div>";
+				
+				$num++;
+			}
+			print "</div>";
+		}
+	print "</div>";
+}
 ?>

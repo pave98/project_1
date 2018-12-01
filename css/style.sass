@@ -3,10 +3,20 @@
     box-sizing: border-box
     
 
-
 body
     background-image: url("http://localhost/project_1/app/images/background.jpg")
     background-size: 100%
+
+.container
+    
+    height: 100%
+    width: 100%
+    margin: 0 auto
+    display: grid
+    grid-template-rows: minmax(min-content, max-content)
+    grid-template-columns: 1fr
+    grid-template-areas:    "header""section1""footer"
+
 
 header
     width: 100%
@@ -95,7 +105,7 @@ nav
     li
         a
             display: block
-
+            color: #000000
             text-align: center
             padding: 14px 16px
             text-decoration: none
@@ -107,15 +117,6 @@ nav
     grid-area: section1
     color: white
 
-.container
-    
-    height: 100%
-    width: 100%
-    margin: 0 auto
-    display: grid
-    grid-template-rows: minmax(min-content, max-content)
-    grid-template-columns: 1fr
-    grid-template-areas:    "header""section1""footer"
 
 .userList
     width: 33%
@@ -127,6 +128,28 @@ form
             color: black
         input, select, textarea
             color: black
+
+.eventItem
+    border: 1px solid red
+    border-radius: 25px
+    display: grid
+    grid-template-rows: 1fr 1fr
+    grid-template-columns: 1fr 1fr 1fr
+    grid-template-areas:    "eventType eventPlace eventTime""desc desc desc"
+    margin-bottom: 5px
+.event0 
+    display: none
+.event1 
+    grid-area: eventType
+
+.event2
+    grid-area: desc
+
+.event3
+    grid-area: eventPlace
+
+.event4
+    grid-area: eventTime
 
 @media only screen and (max-width : 600px)
     body 

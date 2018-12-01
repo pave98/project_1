@@ -10,13 +10,10 @@
     <link rel="stylesheet" href="http://localhost/project_1\css\style.css">
     <link rel="shortcut icon" href="http://localhost/project_1/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css"/>
+
     <script type="text/javascript" src="C:\wamp64\www\project_1\app\galleria\galleryjs.js"></script>
 
-    <script>
-        window.addEventListener("load", ()=>{
-            
-        });
-    </script>
 
 </head>
 <body>
