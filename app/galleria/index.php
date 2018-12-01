@@ -3,6 +3,9 @@
     require "C:\wamp64\www\project_1\app\galleria\galleryjs.js";
 ?>
     <section class="s1">
+        <div class="gallery">
+            
+        </div>
     <?php   
     if (isAdmin()) {
     ?>
