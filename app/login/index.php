@@ -1,5 +1,8 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/header.php'); 
+    if (isLoggedIn()) {
+        header('location: ../index.php');
+    }
 ?>
     <section>
         <div class="header">

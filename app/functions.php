@@ -1,10 +1,10 @@
 <?php 
 session_start();
 
-// connect to database
+// Connection to database.
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
-// variable declaration
+// Declaring variables.
 $username 	  	= "";
 $email   	  	= "";
 $firstname 	  	= "";
@@ -15,28 +15,30 @@ $location		= "";
 $time			= "";
 $errors  		= array(); 
 
+// Including the emailing function. can't get it to work inside the functions file itself.  
 include "sendEmail.php";
 
-// call the register() function if register_btn is clicked
+// if the register button is pressed, call the register function that creates a user and adds it to the database.
 if (isset($_POST['register_btn'])) {
 	register();
 }
 
-// REGISTER USER
+// User registration
 function register(){
-	// call these variables with the global keyword to make them available in function
+	// Calling the global variables to make them usable in this function.
 	global $db, $errors, $username, $email;
 
-	// receive all input values from the form. Call the e() function
-    // defined below to escape form values
+	// Take all variables from POST and escape them using the e() function descriped below.
+	// Password is generated using the generatePassword() function.
 	$username    =  e($_POST['username']);
 	$email       =  e($_POST['email']);
 	$firstname   =  e($_POST['firstname']);
-	$password_1  =  e(GeneratePassword());
+	$password_1  =  e(generatePassword());
     $lastname    =  e($_POST['lastname']);
     $description =  e($_POST['description']);
+	$user_type 	 =  e($_POST['user_type']);
 
-	// form validation: ensure that the form is correctly filled
+	// Form validation.
 	if (empty($username)) { 
 		array_push($errors, "Username is required"); 
 	}
@@ -56,31 +58,26 @@ function register(){
         array_push($errors, "Description is required"); 
     }
 
-	// register user if there are no errors in the form
+	// Register the user if there are no errors.
 	if (count($errors) == 0) {
 
-		SendEmail($email, $username, $password_1);
+		$sqlQuery = "SELECT * FROM users WHERE username='$username'";
+		$checkSQL = mysqli_query($db, $sqlQuery);
 
-		$password = md5($password_1);//encrypt the password before saving in the database
+		if(mysqli_num_rows($checkSQL)) {
+			array_push($errors, "The username already exists!");
+		} else {
 
-		if (isset($_POST['user_type'])) {
-			$user_type = e($_POST['user_type']);
+			// Sends the email to the user. Email contains their login data.
+			sendEmail($email, $username, $password_1);
+
+			//encrypting the password after sending it to the user and before storing it into the database.
+			$password = md5($password_1);
+
 			$query = "INSERT INTO users (username, email, user_type, password, firstName, lastName, description) 
 					  VALUES('$username', '$email', '$user_type', '$password', '$firstname', '$lastname', '$description')";
 			mysqli_query($db, $query);
-			$_SESSION['success']  = "New user successfully created!!";
 			header('location: index.php');
-		}else{
-			$query = "INSERT INTO users (username, email, user_type, password, firstName, lastName, description) 
-					  VALUES('$username', '$email', '$user_type', '$password', '$firstname', '$lastname', '$description')";
-			mysqli_query($db, $query);
-
-			// get id of the created user
-			$logged_in_user_id = mysqli_insert_id($db);
-
-			$_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
-			$_SESSION['success']  = "You are now logged in";
-			header('location: index.php');				
 		}
 	}
 }
@@ -94,14 +91,16 @@ function deleteUser() {
 	global $db, $errors;
 
 	$username = e($_POST['username']);
-	$query = "DELETE FROM users WHERE username='$username'";
-
-	if (mysqli_query($db, $query)) {
-		array_push($errors, "DELETED"); 
+	if($_SESSION['user']['username'] == $username) {
+		array_push($errors, "WHY ARE YOU DELETING YOURSELF!!?!?!?!");
 	} else {
-		echo "Error deleting record: " . mysqli_error($db);
+		$query = "DELETE FROM users WHERE username='$username'";
+		if (mysqli_query($db, $query)) {
+			array_push($errors, "DELETED"); 
+		} else {
+			echo "Error deleting record: " . mysqli_error($db);
+		}
 	}
-	
 }
 
 // return user array from their id
@@ -190,7 +189,7 @@ function login(){
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['success']  = "You are now logged in";
 
-				header('location: index.php');
+				header('location: ../index.php');
 			}
 		}else {
 			array_push($errors, "Wrong username/password combination");
@@ -223,7 +222,7 @@ function printUsers() {
 		print "<h2>Käyttäjälista</h2>";
 		print "<h3>";
 		while($row = mysqli_fetch_array($result)){
-			print "<p>".$row['firstName']."</p>";
+			print "<p>".$row['username']."</p>";
 		}
 		print "</h3>";
 	print "</div>";
@@ -333,7 +332,7 @@ function printEvents() {
 
 
 
-function GeneratePassword() {
+function generatePassword() {
 	$characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789!?&";
 	$generatedPassword = substr( str_shuffle($characters),0,8);
 	return $generatedPassword;

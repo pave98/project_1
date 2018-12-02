@@ -29,21 +29,34 @@ header
     padding: 5px
     background-color: rgba(255, 165, 0, .7)
 
-    h1
-        grid-area: logo
-        a
-            color: white
-            text-decoration: none
-            font-size: 20px
 
     nav
         grid-area: nav
         font-size: 25px
         margin-top: 50px
+        float: left
         ul
-            float: right
+            list-style-type: none
+            height: 100%
+            margin: 0
+            padding: 0
+            overflow: hidden
+            padding: 5px
         li
+            float: left
             display: inline
+        li
+            a
+                display: block
+                color: #000000
+                text-align: center
+                padding: 14px 16px
+                text-decoration: none
+                font-size: 20px
+            a:hover
+                background-color: #555
+                color: white
+
 
     img 
         max-height: 200px
@@ -93,25 +106,7 @@ footer
         color: black
 
 nav
-    ul
-        list-style-type: none
-        height: 100%
-        margin: 0
-        padding: 0
-        overflow: hidden
-        padding: 5px
-    li
-        float: left
-    li
-        a
-            display: block
-            color: #000000
-            text-align: center
-            padding: 14px 16px
-            text-decoration: none
-        a:hover
-            background-color: #555
-            color: white
+    
 
 .s1
     grid-area: section1
