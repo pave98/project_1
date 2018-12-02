@@ -15,6 +15,8 @@ $location		= "";
 $time			= "";
 $errors  		= array(); 
 
+include "sendEmail.php";
+
 // call the register() function if register_btn is clicked
 if (isset($_POST['register_btn'])) {
 	register();
@@ -29,9 +31,8 @@ function register(){
     // defined below to escape form values
 	$username    =  e($_POST['username']);
 	$email       =  e($_POST['email']);
-	$password_1  =  e($_POST['password_1']);
-    $password_2  =  e($_POST['password_2']);
-    $firstname   =  e($_POST['firstname']);
+	$firstname   =  e($_POST['firstname']);
+	$password_1  =  e(GeneratePassword());
     $lastname    =  e($_POST['lastname']);
     $description =  e($_POST['description']);
 
@@ -45,9 +46,6 @@ function register(){
 	if (empty($password_1)) { 
 		array_push($errors, "Password is required"); 
 	}
-	if ($password_1 != $password_2) {
-		array_push($errors, "The two passwords do not match");
-    }
     if(empty($firstname)) {
         array_push($errors, "First name is required"); // 
     }
@@ -60,6 +58,9 @@ function register(){
 
 	// register user if there are no errors in the form
 	if (count($errors) == 0) {
+
+		SendEmail($email, $username, $password_1);
+
 		$password = md5($password_1);//encrypt the password before saving in the database
 
 		if (isset($_POST['user_type'])) {
@@ -82,6 +83,25 @@ function register(){
 			header('location: index.php');				
 		}
 	}
+}
+
+
+if (isset($_POST['deleteUser_btn'])) {
+	deleteUser();
+}
+
+function deleteUser() {
+	global $db, $errors;
+
+	$username = e($_POST['username']);
+	$query = "DELETE FROM users WHERE username='$username'";
+
+	if (mysqli_query($db, $query)) {
+		array_push($errors, "DELETED"); 
+	} else {
+		echo "Error deleting record: " . mysqli_error($db);
+	}
+	
 }
 
 // return user array from their id
@@ -111,6 +131,8 @@ function display_error() {
 		echo '</div>';
 	}
 }	
+
+
 
 function isLoggedIn()
 {
@@ -308,4 +330,15 @@ function printEvents() {
 		}
 	print "</div>";
 }
+
+
+
+function GeneratePassword() {
+	$characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789!?&";
+	$generatedPassword = substr( str_shuffle($characters),0,8);
+	return $generatedPassword;
+}
+
+
 ?>
+
