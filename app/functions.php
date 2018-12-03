@@ -197,6 +197,7 @@ function login(){
 	}
 }
 
+// Checks if the current user is admin.
 function isAdmin()
 {
 	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
@@ -213,6 +214,8 @@ if (isset($_GET['logout'])) {
     header('location: ../app/index.php');
 }
 
+
+// Prints all the users froms users database to a list.
 function printUsers() {
 	global $db;
     $query2="SELECT * FROM users";
@@ -228,10 +231,12 @@ function printUsers() {
 	print "</div>";
 }
 
+// call resetPassword() function.
 if (isset($_POST['reset_btn'])) {
 	resetPassword();
 }
 
+// Resets the password of the current user.
 function resetPassword() {
 	global $db, $username, $errors;
 
@@ -269,17 +274,17 @@ function resetPassword() {
 	}
 }
 
+// Calls the createEvent() function.
 if (isset($_POST['createEvent_btn'])) {
 	createEvent();
 }
 
-
+// Creates an event to the events database table.
 function createEvent(){
-	// call these variables with the global keyword to make them available in function
+	// Calling global variables to be used in this function.
 	global $db, $errors;
 
-	// receive all input values from the form. Call the e() function
-    // defined below to escape form values
+	// receive all input values from the form and escape them with the e() function.
 	$eventType    =  e($_POST['eventType']);
 	$description  =  e($_POST['description']);
 	$location	  =  e($_POST['location']);
@@ -299,7 +304,7 @@ function createEvent(){
         array_push($errors, "Time is required"); // 
     }
 
-	// register user if there are no errors in the form
+	// If no errors then adds the event to the table. 
 	if (count($errors) == 0) {
 		$query = "INSERT INTO events (eventType, description, location, time) 
 					VALUES('$eventType', '$description', '$location', '$time')";
@@ -307,6 +312,7 @@ function createEvent(){
 	}
 }
 
+// Prints all the events from the database to a list.
 function printEvents() {
 	global $db;
     $query2="SELECT * FROM events";
@@ -331,7 +337,7 @@ function printEvents() {
 }
 
 
-
+// Generates a random password with a length of 8.
 function generatePassword() {
 	$characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789!?&";
 	$generatedPassword = substr( str_shuffle($characters),0,8);
