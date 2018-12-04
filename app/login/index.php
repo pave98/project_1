@@ -9,7 +9,7 @@
             <h2>Login</h2>
         </div>
 
-        <form method="post" action="index.php">
+        <form method="post" action="">
             <!-- Display validation errors here -->
             <?php echo display_error(); ?>
 

@@ -14,7 +14,7 @@
     
     <script type="text/javascript" src="C:\wamp64\www\project_1\app\galleria\galleryjs.js"></script>
 
-<?php $_SERVER['DOCUMENT_ROOT']?>
+
 </head>
 <body>
     <div class="container">
