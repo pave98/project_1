@@ -39,14 +39,6 @@
                 </select>
             </div>
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password_1">
-            </div>
-            <div class="input-group">
-                <label>Confirm password</label>
-                <input type="password" name="password_2">
-            </div>
-            <div class="input-group">
                 <label>Kuvaus</label>
                 <input type="textarea" name="description" value="<?php echo $description; ?>">
             </div>

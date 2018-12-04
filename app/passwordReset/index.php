@@ -6,25 +6,28 @@
         header('location: ../login/index.php');
     }
 ?>
-    <form method="post" action="">
+    <section class="s1">
+        <form method="post" action="">
 
-        <!-- Display validation errors here -->
-        <?php echo display_error(); ?>
+            <!-- Display validation errors here -->
+            <?php echo display_error(); ?>
 
-        <h1>Change password</h1>
-        <div class="input-group">
-            <input type="password" name="oldPassword" placeholder="Old Password" required>
-        </div>
-        <div class="input-group">
-            <input type="password" name="newPassword" placeholder="New Password" required>
-        </div>
-        <div class="input-group">
-            <input type="password" name="newPassword2" placeholder="Retype New Password" required>
-        </div>
-        <div class="input-group">
-            <input type="submit" name="reset_btn" value="Reset Password">
-        </div>
-    </form>
+            <h1>Change password</h1>
+            <div class="input-group">
+                <input type="password" name="oldPassword" placeholder="Old Password" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="newPassword" placeholder="New Password" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="newPassword2" placeholder="Retype New Password" required>
+            </div>
+            <div class="input-group">
+                <input type="submit" name="reset_btn" value="Reset Password">
+            </div>
+        </form>
+    </section>
+    
 <?php
     require "../footer.php";
 ?>

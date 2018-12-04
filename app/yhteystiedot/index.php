@@ -3,9 +3,9 @@
 ?>
     <section class="s1">
         <h1>Yhteystiedot</h1>
-        <p class="contact">(kännykä icon): +358 45 6313 113<br>
-            (maili icon) antti.a.koskinen@gmail.com 
-        </p>
+        
+        <p class="contact"><i class="fas fa-mobile-alt"></i> +358 45 6313 113</p><br>
+        <p class="contact"><i class="fas fa-envelope"></i> antti.a.koskinen@gmail.com</p>
 
     </section>
     
