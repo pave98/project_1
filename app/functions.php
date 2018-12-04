@@ -6,6 +6,7 @@ $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
 // Declaring variables.
 $username 	  	= "";
+$user_type		= "";
 $email   	  	= "";
 $firstname 	  	= "";
 $lastname 	  	= "";
@@ -61,7 +62,7 @@ function register(){
 	// Register the user if there are no errors.
 	if (count($errors) == 0) {
 
-		$sqlQuery = "SELECT * FROM users WHERE username='$username'";
+		$sqlQuery = "SELECT * FROM users WHERE (username='$username' OR email='$email')";
 		$checkSQL = mysqli_query($db, $sqlQuery);
 
 		if(mysqli_num_rows($checkSQL)) {
@@ -181,14 +182,10 @@ function login(){
 			// check if user is admin or user
 			$logged_in_user = mysqli_fetch_assoc($results);
 			if ($logged_in_user['user_type'] == 'admin') {
-
 				$_SESSION['user'] = $logged_in_user;
-				$_SESSION['success']  = "You are now logged in";
 				header('location: ../../admin/index.php');		  
 			}else{
 				$_SESSION['user'] = $logged_in_user;
-				$_SESSION['success']  = "You are now logged in";
-
 				header('location: ../index.php');
 			}
 		}else {
@@ -200,7 +197,7 @@ function login(){
 // Checks if the current user is admin.
 function isAdmin()
 {
-	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
+	if (isset($_SESSION['user'])&& $_SESSION['user']['user_type'] == 'admin' ) {
 		return true;
 	}else{
 		return false;
@@ -270,6 +267,44 @@ function resetPassword() {
 			$_SESSION['user']['password'] = $newPassword;
 		} else {
 			array_push($errors, "Wrong password");
+		}
+	}
+}
+
+// call passwordReset() function.
+if (isset($_POST['resetPassword_btn'])) {
+	passwordReset();
+}
+
+function passwordReset() {
+	global $db, $errors;
+
+	$email = e($_POST['email']);
+	$newPassword = generatePassword();
+
+	// make sure form is filled properly
+	if (empty($email)) {
+		array_push($errors, "An email address is required");
+	}
+
+	
+	if (count($errors) == 0) {
+		
+		$query = "SELECT * FROM users WHERE email='$email' LIMIT 1";
+		$results = mysqli_query($db, $query);
+
+		if (mysqli_num_rows($results) == 1) {
+			$sqlQuery = "SELECT * FROM users WHERE email='$email'";
+			$checkSQL = mysqli_query($db, $sqlQuery);
+			$row = mysqli_fetch_assoc($checkSQL);
+			$username = $row['username'];
+			sendEmail($email, $username, $newPassword);
+			$newPassword = md5($newPassword);
+			$query = "UPDATE users SET password='$newPassword' WHERE (username='$username' AND email='$email')";
+			$updateQuery = mysqli_query($db, $query);
+			array_push($errors, "Uusi salasana lähetetty sähköpostiin.");
+		} else {
+			array_push($errors, "Antamaasi sähköpostia ei löydy");
 		}
 	}
 }

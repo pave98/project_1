@@ -5,27 +5,18 @@
     }
 ?>
     <section class="s1">
-        <div class="header">
-            <h2>Login</h2>
-        </div>
-
         <form method="post" action="index.php">
+            <h1>Forgot Your Password?</h1>
+            <p>Type in your email to get a new password.</p>
             <!-- Display validation errors here -->
             <?php echo display_error(); ?>
-
             <div class="input-group">
-                <label>Username</label><br>
-                <input type="text" name="username">
+                <input type="email" name="email" placeholder="Email" required>
             </div>
             <div class="input-group">
-                <label>Password</label><br>
-                <input type="password" name="password"><br><br>
-            </div>
-            <div class="input-group">
-                <button type="submit" name="login_btn" class="btn">Login</button>
+                <input type="submit" name="resetPassword_btn" value="Reset Password">
             </div>
         </form>
-        <p><a href="resetPassword.php">Unohtuiko salasana?</a></p>
     </section>
     
 
