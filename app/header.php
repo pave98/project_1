@@ -11,8 +11,6 @@
     <link rel="shortcut icon" href="http://localhost/project_1/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/v4-shims.css">
-    
-    <script type="text/javascript" src="C:\wamp64\www\project_1\app\galleria\galleryjs.js"></script>
 
 <?php $_SERVER['DOCUMENT_ROOT']?>
 </head>
