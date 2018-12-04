@@ -6,7 +6,6 @@ $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
 // Declaring variables.
 $username 	  	= "";
-$user_type		= "";
 $email   	  	= "";
 $firstname 	  	= "";
 $lastname 	  	= "";
@@ -143,12 +142,7 @@ function isLoggedIn()
 	}
 }
 
-// log user out if logout button clicked
-if (isset($_GET['logout'])) {
-	session_destroy();
-	unset($_SESSION['user']);
-	header("location: login.php");
-}
+
 
 // call the login() function if register_btn is clicked
 if (isset($_POST['login_btn'])) {
@@ -177,22 +171,24 @@ function login(){
 
 		$query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
 		$results = mysqli_query($db, $query);
-
+		
 		if (mysqli_num_rows($results) == 1) { // user found
 			// check if user is admin or user
 			$logged_in_user = mysqli_fetch_assoc($results);
 			if ($logged_in_user['user_type'] == 'admin') {
 				$_SESSION['user'] = $logged_in_user;
-				header('location: ../../admin/index.php');		  
 			}else{
 				$_SESSION['user'] = $logged_in_user;
-				header('location: ../index.php');
 			}
 		}else {
 			array_push($errors, "Wrong username/password combination");
 		}
+		
 	}
 }
+
+
+
 
 // Checks if the current user is admin.
 function isAdmin()
@@ -212,7 +208,7 @@ if (isset($_GET['logout'])) {
 }
 
 
-// Prints all the users froms users database to a list.
+// Prints all the users from users database to a list.
 function printUsers() {
 	global $db;
     $query2="SELECT * FROM users";
@@ -352,7 +348,9 @@ function printEvents() {
 	global $db;
     $query2="SELECT * FROM events";
 	$result = mysqli_query($db, $query2);
-	
+	$row2 = mysqli_fetch_assoc($result);
+	$id = $row2['id'];
+
 	print "<div class='eventList'>";
 		print "<h1>Tapahtumat</h1>";
 		while($row = mysqli_fetch_assoc($result)) {
@@ -366,11 +364,34 @@ function printEvents() {
 				
 				$num++;
 			}
+			if(isAdmin()) {
+				print '
+					<form action="index.php" method="post">
+						<input type="hidden" name="id" value="'.$id.'" />
+						<input type="submit" name="deleteEvent_btn" value="X" >
+					</form> 
+				';
+			}
+			
 			print "</div>";
 		}
 	print "</div>";
 }
 
+
+// Calls the deleteEvent() function.
+if (isset($_POST['deleteEvent_btn'])) {
+	deleteEvent();
+}
+
+function deleteEvent() {
+	global $db;
+
+	$id = e($_POST['id']);
+
+	$deleteQuery = "DELETE FROM events WHERE id='$id'";
+	$result = mysqli_query($db, $deleteQuery);
+}
 
 // Generates a random password with a length of 8.
 function generatePassword() {
