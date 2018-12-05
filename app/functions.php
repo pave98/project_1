@@ -369,9 +369,9 @@ function printEvents() {
 			printNotComing($event_id);
 
 			echo "<div class='buttons'>";
-			if(checkDecision($event_id)) {
-				printDecisionButtons($user_id, $event_id);
-			}
+			
+			printDecisionButtons($user_id, $event_id);
+		
 			if(isAdmin()) {
 				printDeleteButton($event_id);
 			}
@@ -469,10 +469,18 @@ function makeDecision() {
 	$event_id = e($_POST['event_id']);
 	$user_id = e($_POST['user_id']);
 	$decision = e($_POST['decision']);
-
-	$query = "INSERT INTO attending (event_id, 					user_id, decision) 
+	$check = "SELECT * FROM attending WHERE (event_id='$event_id' AND user_id='$user_id')";
+	$checkResult = mysqli_query($db, $check);
+	if(mysqli_num_rows($checkResult) == 1) {
+		$query = "UPDATE attending SET decision='$decision' WHERE (event_id='$event_id' AND user_id='$user_id')";
+		$endResult = mysqli_query($db, $query);
+	} else {
+		$query = 	"INSERT INTO attending (event_id, user_id, decision) 
 					VALUES('$event_id', '$user_id', '$decision')";
-			mysqli_query($db, $query);
+		$endResult = mysqli_query($db, $query);
+	}
+
+	
 }
 
 // Calls the deleteEvent() function.
@@ -497,7 +505,4 @@ function generatePassword() {
 	$generatedPassword = substr( str_shuffle($characters),0,8);
 	return $generatedPassword;
 }
-
-
 ?>
-
