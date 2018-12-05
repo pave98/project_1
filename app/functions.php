@@ -106,7 +106,7 @@ function deleteUser() {
 // return user array from their id
 function getUserById($id){
 	global $db;
-	$query = "SELECT * FROM users WHERE id=" . $id;
+	$query = "SELECT * FROM users WHERE id=" . $user_id;
 	$result = mysqli_query($db, $query);
 
 	$user = mysqli_fetch_assoc($result);
@@ -348,12 +348,11 @@ function printEvents() {
 	global $db;
     $query2="SELECT * FROM events";
 	$result = mysqli_query($db, $query2);
-	$row2 = mysqli_fetch_assoc($result);
-	$id = $row2['id'];
-
+	$user_id = $_SESSION['user']['user_id'];
 	print "<div class='eventList'>";
 		print "<h1>Tapahtumat</h1>";
 		while($row = mysqli_fetch_assoc($result)) {
+			$event_id = $row['event_id'];
 			$num = 0;
 			print "<div class=eventItem>";
 			foreach($row as $ding) {
@@ -364,20 +363,117 @@ function printEvents() {
 				
 				$num++;
 			}
+
+			printAttendees($event_id);
+
+			printNotComing($event_id);
+
+			echo "<div class='buttons'>";
+			if(checkDecision($event_id)) {
+				printDecisionButtons($user_id, $event_id);
+			}
 			if(isAdmin()) {
-				print '
-					<form action="index.php" method="post">
-						<input type="hidden" name="id" value="'.$id.'" />
-						<input type="submit" name="deleteEvent_btn" value="X" >
-					</form> 
-				';
+				printDeleteButton($event_id);
 			}
 			
+			print "</div>";
 			print "</div>";
 		}
 	print "</div>";
 }
 
+function checkDecision($event_id="") {
+	global $db;
+	$user_id = $_SESSION['user']['user_id'];
+	$query = "SELECT * From attending Where (event_id='$event_id' AND user_id='$user_id')";
+	$result = mysqli_query($db, $query);
+	if(mysqli_num_rows($result) == 1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function printAttendees($event_id="") {
+
+	global $db;
+	$query = "SELECT * FROM attending WHERE (event_id='$event_id' AND decision='imIn')";
+	$result = mysqli_query($db, $query);
+	$attendees = array();
+	while($row = mysqli_fetch_assoc($result)) {
+		array_push($attendees, $row['user_id']);
+	}
+	echo "<div class='coming'><h5>Tulossa</h5>";
+	echo "<ul>";
+	foreach($attendees as $result) {
+		$query = "SELECT * FROM users WHERE user_id='$result'";
+		$data = mysqli_query($db, $query);
+		$user = mysqli_fetch_assoc($data)['firstName'];
+		echo "<li class='comingUser'>".$user."</li>";
+	}
+	echo "</ul></div>";
+}
+
+function printNotComing($event_id="") {
+	global $db;
+	$query = "SELECT * FROM attending WHERE (event_id='$event_id' AND decision='imOut')";
+	$result = mysqli_query($db, $query);
+	$notAttending = array();
+	while($row = mysqli_fetch_assoc($result)) {
+		array_push($notAttending, $row['user_id']);
+	}
+	echo "<div class='notComing'><h5>Ei tulossa</h5>";
+	echo "<ul>";
+	foreach($notAttending as $result) {
+		$query = "SELECT * FROM users WHERE user_id='$result'";
+		$data = mysqli_query($db, $query);
+		$user = mysqli_fetch_assoc($data)['firstName'];
+		echo "<li class='notComingUser'>".$user."</li>";
+	}
+	echo "</ul></div>";
+}
+
+function printDeleteButton($event_id = "") {
+	print '
+		<form action="index.php" method="post">
+			<input type="hidden" name="event_id" value="'.$event_id.'" />
+			<input type="submit" name="deleteEvent_btn" value="Delete event" >
+		</form> 
+	';
+}
+
+function printDecisionButtons($user_id = "", $event_id = "") {
+	print '
+		<form action="index.php" method="post">
+			<input type="hidden" name="event_id" value="'.$event_id.'" />
+			<input type="hidden" name="user_id" value="'.$user_id.'" />
+			<input type="hidden" name="decision" value="imIn" />
+			<input type="submit" name="decision_btn" value="Im In" >
+		</form> 
+		<form action="index.php" method="post">
+			<input type="hidden" name="event_id" value="'.$event_id.'" />
+			<input type="hidden" name="user_id" value="'.$user_id.'" />
+			<input type="hidden" name="decision" value="imOut" />
+			<input type="submit" name="decision_btn" value="Im Out" >
+		</form> 
+	';
+}
+
+if (isset($_POST['decision_btn'])) {
+	makeDecision();
+}
+
+function makeDecision() {
+	global $db;
+
+	$event_id = e($_POST['event_id']);
+	$user_id = e($_POST['user_id']);
+	$decision = e($_POST['decision']);
+
+	$query = "INSERT INTO attending (event_id, 					user_id, decision) 
+					VALUES('$event_id', '$user_id', '$decision')";
+			mysqli_query($db, $query);
+}
 
 // Calls the deleteEvent() function.
 if (isset($_POST['deleteEvent_btn'])) {
@@ -387,10 +483,12 @@ if (isset($_POST['deleteEvent_btn'])) {
 function deleteEvent() {
 	global $db;
 
-	$id = e($_POST['id']);
+	$event_id = e($_POST['event_id']);
 
-	$deleteQuery = "DELETE FROM events WHERE id='$id'";
+	$deleteQuery = "DELETE FROM events WHERE event_id='$event_id'";
 	$result = mysqli_query($db, $deleteQuery);
+	$deleteQuery2 = "DELETE FROM attending WHERE event_id='$event_id'";
+	$result2 = mysqli_query($db, $deleteQuery2);
 }
 
 // Generates a random password with a length of 8.
