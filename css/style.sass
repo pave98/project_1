@@ -126,9 +126,6 @@ footer
     *
         color: black
 
-nav
-    
-
 .s1
     grid-area: section1
     color: white
@@ -149,9 +146,9 @@ form
     border: 1px solid red
     border-radius: 25px
     display: grid
-    grid-template-rows: 1fr 1fr
+    grid-template-rows: 2fr 2fr 1fr 2fr
     grid-template-columns: 1fr 1fr 1fr
-    grid-template-areas:    "eventType eventPlace eventTime""desc desc desc"
+    grid-template-areas:    "eventType eventPlace eventTime""desc desc desc""buttons buttons buttons""coming . notComing"
     margin-bottom: 5px
 .event0 
     display: none
@@ -166,6 +163,17 @@ form
 
 .event4
     grid-area: eventTime
+.coming
+    grid-area: coming
+    ul
+        list-style-type: none
+
+.notComing
+    grid-area: notComing
+    ul
+        list-style-type: none
+.buttons
+    grid-area: buttons
 
 @media only screen and (max-width : 600px)
     body 
