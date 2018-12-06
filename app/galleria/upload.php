@@ -1,38 +1,40 @@
 <?php
-$target_dir = "C:\wamp64\www\project_1\app\images\uploads\ ";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$files = array_filter($_FILES['upload']['name']); //something like that to be used before processing files.
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-}
-// Check if file already exists
-if (file_exists($target_file)) {
-    echo "File already exists.";
+$textCounter = 0;
+// Count # of uploaded files in array
+$total = count($_FILES['upload']['name']);
+
+// Loop through each file
+for( $i=0 ; $i < $total ; $i++ ) {
+
+//Get the temp file path
+$tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+$filename = $_FILES['upload']['name'][$i];
+$fileEnd = explode('.', $filename);
+ 
+if(!preg_match("/\.(jpeg|png|jpg)$/", $filename)){
+    echo "Sorry, only JPG, JPEG & PNG files are allowed. ";
     $uploadOk = 0;
 }
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-    echo "JPG, JPEG and PNG files only.";
-    $uploadOk = 0;
-}
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    } else {
-        echo "There was an error uploading your file.";
+if($uploadOk){
+//Make sure we have a file path
+    if($tmpFilePath != ""){
+        //Setup our new file path
+        $newFilePath = "C:\wamp64\www\project_1\app\images\uploads\ " . $_FILES['upload']['name'][$i];
+
+        //Upload the file into the temp dir
+        if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+            if($textCounter === 0){
+                header('Refresh: 3; url = http://localhost/project_1/app/galleria/');
+                echo "Image(s) uploaded! Redirecting...";
+                $textCounter = 1;
+            }
+        }
     }
+  }else{
+      header('Refresh: 3; url = http://localhost/project_1/app/galleria/');
+      echo"Upload unsuccessful. Redirecting...";
+  }
 }
 ?>
