@@ -56,7 +56,7 @@
             print'<h1> #'.$this->getNumber().' '.$this->getLname().'</h1>';
         }
         function printPic(){
-            print"<img src='http://localhost/project_1/app/images/grozersmol.jpg' alt='grözer'><br>";
+            print"<div class='imgwrapper'><img src='http://localhost/project_1/app/images/grozersmol.jpg' alt='grözer'></div><br>";
         }
         function printStats(){
             print "Nimi: ".$this->getFname()." ".$this->getLname()."<br>";

@@ -364,11 +364,12 @@ function printEvents() {
 				
 				$num++;
 			}
-
+			print "<div class='attendLists'>";
 			printAttendees($event_id);
 
 			printNotComing($event_id);
 
+			print "</div>";
 			echo "<div class='buttons'>";
 			
 			printDecisionButtons($user_id, $event_id);
@@ -380,6 +381,7 @@ function printEvents() {
 			print "</div>";
 			print "</div>";
 		}
+	
 	print "</div>";
 }
 
@@ -427,7 +429,8 @@ function printAttendees($event_id="") {
 	while($row = mysqli_fetch_assoc($result)) {
 		array_push($attendees, $row['user_id']);
 	}
-	echo "<div class='coming'><h5>Tulossa</h5>";
+	$count = count($attendees);
+	echo "<div class='coming'><h5><i class='far fa-thumbs-up'></i> ".$count."</h5>";
 	echo "<ul>";
 	foreach($attendees as $result) {
 		$query = "SELECT * FROM users WHERE user_id='$result'";
@@ -446,7 +449,8 @@ function printNotComing($event_id="") {
 	while($row = mysqli_fetch_assoc($result)) {
 		array_push($notAttending, $row['user_id']);
 	}
-	echo "<div class='notComing'><h5>Ei tulossa</h5>";
+	$count = count($notAttending);
+	echo "<div class='notComing'><h5><i class='far fa-thumbs-down'></i> ".$count."</h5>";
 	echo "<ul>";
 	foreach($notAttending as $result) {
 		$query = "SELECT * FROM users WHERE user_id='$result'";
@@ -461,7 +465,7 @@ function printDeleteButton($event_id = "") {
 	print '
 		<form action="index.php" method="post">
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
-			<input type="submit" name="deleteEvent_btn" value="Delete event" >
+			<button class="deleteButton" type="submit" name="deleteEvent_btn">Poista tapahtuma</button>
 		</form> 
 	';
 }
@@ -472,13 +476,17 @@ function printDecisionButtons($user_id = "", $event_id = "") {
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
 			<input type="hidden" name="user_id" value="'.$user_id.'" />
 			<input type="hidden" name="decision" value="imIn" />
-			<input type="submit" name="decision_btn" value="Im In" >
+			<button class="inButton" type="submit" name="decision_btn" >
+				<i class="far fa-thumbs-up"></i> IN
+			</button>
 		</form> 
 		<form action="index.php" method="post">
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
 			<input type="hidden" name="user_id" value="'.$user_id.'" />
 			<input type="hidden" name="decision" value="imOut" />
-			<input type="submit" name="decision_btn" value="Im Out" >
+			<button class="outButton" type="submit" name="decision_btn">
+				<i class="far fa-thumbs-down"></i> OUT
+			</button>
 		</form> 
 	';
 }

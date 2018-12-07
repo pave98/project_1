@@ -17,10 +17,10 @@
             
             <div class="input-group">
                 <label>Event</label>
-                <select name="eventType" id="eventType" >
+                <select name="eventType" id="eventType" autofocus>
                     <option value=""></option>
                     <option value="treeni">Treeni</option>
-                    <option value="peli">Peli</option>
+                    <option value="peli">Matsi</option>
                 </select>
             </div>
             <div class="input-group">

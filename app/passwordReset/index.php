@@ -14,7 +14,7 @@
 
             <h1>Change password</h1>
             <div class="input-group">
-                <input type="password" name="oldPassword" placeholder="Old Password" required>
+                <input type="password" name="oldPassword" placeholder="Old Password" required autofocus>
             </div>
             <div class="input-group">
                 <input type="password" name="newPassword" placeholder="New Password" required>
