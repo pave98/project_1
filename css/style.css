@@ -245,8 +245,7 @@ form div input, form div select, form div textarea {
     float: right;
     display: block;
   }
-}
-@media screen and (max-width: 600px) {
+
   .topnav.responsive {
     position: relative;
   }
@@ -262,11 +261,22 @@ form div input, form div select, form div textarea {
     display: block;
     text-align: left;
   }
-}
-@media only screen and (max-width: 600px) {
+
   body {
     margin: 0;
     width: 100%;
+  }
+
+  header {
+    width: 100%;
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 200px;
+    grid-template-areas: "logo nav nav";
+    color: white;
+    padding: 5px;
+    background-color: rgba(255, 165, 0, 0.7);
   }
 }
 @media only screen and (min-width: 600px) {
