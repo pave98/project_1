@@ -15,7 +15,7 @@
 
             <div class="input-group">
                 <label>Username</label><br>
-                <input type="text" name="username">
+                <input type="text" name="username" autofocus>
             </div>
             <div class="input-group">
                 <label>Password</label><br>

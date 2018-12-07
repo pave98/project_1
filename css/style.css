@@ -4,17 +4,17 @@
 }
 
 body {
-  background-image: url("http://localhost/project_1/app/images/background.jpg");
+  background-image: url("/project_1/app/images/background.jpg");
   background-size: 100%;
 }
 
 .container {
   height: 100%;
   width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: minmax(-webkit-min-content, -webkit-max-content);
-  grid-template-rows: minmax(min-content, max-content);
+  grid-template-rows: auto;
   grid-template-columns: 1fr;
   grid-template-areas: "header" "section1" "footer";
 }
@@ -61,9 +61,6 @@ section {
   background-color: rgba(255, 165, 0, 0.7);
   text-align: center;
 }
-section h1 {
-  font-size: 80px;
-}
 section .motto {
   font-size: 100px;
 }
@@ -102,27 +99,35 @@ section .motto {
           animation: fadeIn 0.5s ease-in 1 forwards;
 }
 
+.teamheader {
+  margin: 5px 0;
+}
+
 .players {
-  margin-top: -65px;
+  margin-top: 5px;
+  width: 100%;
 }
 
 .player {
   float: left;
   height: auto;
+  width: 40%;
   text-align: left;
-  font-size: 25px;
-  margin: 20px 0px 20px 50px;
+  margin: 0 3% 0 3%;
 }
 .player h1 {
-  font-size: 60px;
+  margin-top: 5px;
 }
-
-p {
-  font-size: 25px;
+.player .imgwrapper {
+  max-width: 420px;
+}
+.player .imgwrapper img {
+  width: 100%;
+  height: auto;
 }
 
 .intro {
-  margin-top: -50px;
+  margin-top: 5px;
 }
 
 aside {
@@ -160,13 +165,104 @@ form div input, form div select, form div textarea {
 }
 
 .eventItem {
+  height: auto;
+  background-color: rgba(215, 144, 14, 0.5);
+  width: 100%;
+  max-width: 500px;
+  margin: 5px auto 5px auto;
+  padding: 5px;
   border: 1px solid red;
   border-radius: 25px;
   display: grid;
-  grid-template-rows: 2fr 2fr 1fr 2fr;
+  grid-template-rows: repeat(4, auto);
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: "eventType eventPlace eventTime" "desc desc desc" "buttons buttons buttons" "coming . notComing";
-  margin-bottom: 5px;
+  grid-template-areas: "eventType eventPlace eventTime" "desc desc desc" "buttons buttons buttons" "attend attend attend";
+}
+
+.attendLists {
+  grid-area: attend;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "coming notComing";
+}
+
+.inButton {
+  color: #00FF00;
+  background: transparent;
+  border: 2px solid #00FF00;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+  border: 2px solid #00FF00;
+}
+
+.inButton:hover {
+  background-color: #00FF00;
+  color: white;
+}
+
+.outButton {
+  color: #FF0000;
+  background: transparent;
+  border: 2px solid #FF0000;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  padding: 16px 23.5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+  border: 2px solid #FF0000;
+}
+
+.outButton:hover {
+  background-color: #FF0000;
+  color: white;
+}
+
+.deleteButton {
+  color: #FF0000;
+  background: transparent;
+  border: 2px solid #FF0000;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+  border: 2px solid #FF0000;
+}
+
+.deleteButton:hover {
+  background-color: #FF0000;
+  color: white;
 }
 
 .event0 {
@@ -190,26 +286,51 @@ form div input, form div select, form div textarea {
 }
 
 .coming {
+  border: red 1px solid;
+  border-radius: 25px;
   grid-area: coming;
+  margin: 5px;
+}
+.coming h5 {
+  margin: 5px 0 5px 0;
 }
 .coming ul {
   list-style-type: none;
+  text-align: center;
+  padding: 0;
+}
+.coming ul li {
+  margin: 0 auto 0 auto;
 }
 
 .notComing {
+  border: red 1px solid;
+  border-radius: 25px;
   grid-area: notComing;
+  margin: 5px;
+}
+.notComing h5 {
+  margin: 5px 0 5px 0;
 }
 .notComing ul {
   list-style-type: none;
+  text-align: center;
+  padding: 0;
+}
+.notComing ul li {
+  margin: 0 auto 0 auto;
 }
 
 .buttons {
   grid-area: buttons;
 }
+.buttons form {
+  display: inline;
+  float: center;
+}
 
 .topnav {
   overflow: hidden;
-  background-color: #333;
 }
 
 .topnav a {
@@ -267,28 +388,32 @@ form div input, form div select, form div textarea {
     width: 100%;
   }
 
+  .container {
+    width: 100%;
+  }
+
+  .s1 * {
+    width: 100%;
+    height: auto;
+  }
+
   header {
+    display: grid;
     width: 100%;
     grid-area: header;
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 200px;
-    grid-template-areas: "logo nav nav";
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: "logo" "nav";
     color: white;
-    padding: 5px;
-    background-color: rgba(255, 165, 0, 0.7);
+    padding: 0;
   }
-}
-@media only screen and (min-width: 600px) {
-  .container {
-    height: auto;
-    max-width: 1000px;
-    margin: 0 auto;
+  header nav {
+    margin: 0;
   }
-}
-@media only screen and (min-width: 1200px) {
-  .container {
-    height: auto;
-    margin: 0 auto;
+  header .logo {
+    text-align: center;
+  }
+  header img {
+    height: 150px;
   }
 }
