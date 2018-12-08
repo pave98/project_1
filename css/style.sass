@@ -32,20 +32,8 @@ header
 
     nav
         grid-area: nav
-        font-size: 25px
-        margin-top: 50px
+        margin-top: 20px
         float: left
-        
-        a
-            display: block
-            color: #000000
-            text-align: center
-            padding: 14px 16px
-            text-decoration: none
-            font-size: 20px
-            float: left
-            display: inline
-
         a:hover
             background-color: #555
             color: white
@@ -113,7 +101,8 @@ section
 
 
 .intro 
-    margin-top: 5px
+    margin: 10px
+    text-align: left
 aside
     padding: 5px
 
@@ -145,6 +134,7 @@ form
 
 .eventItem
     height: auto
+    box-shadow: 10px 5px #a7700b
     background-color: rgba(215,144,14, .5)
     width: 100%
     max-width: 500px
@@ -290,9 +280,9 @@ form
     display: block
     color: #f2f2f2
     text-align: center
-    padding: 14px 16px
+    padding: 10px 11px
     text-decoration: none
-    font-size: 17px
+    font-size: 2em
 
 
 .topnav a:hover 
@@ -309,7 +299,7 @@ form
     display: none
 
 
-@media screen and (max-width: 600px) 
+@media screen and (max-width: 650px) 
 
 
     .topnav a 
@@ -353,6 +343,8 @@ form
             text-align: center
         img
             height: 150px
-    
 
-
+@media screen and (max-width: 765px)
+    .topnav
+        a
+            font-size: 1.75em
