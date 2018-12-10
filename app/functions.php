@@ -347,20 +347,37 @@ function createEvent(){
 // Prints all the events from the database to a list.
 function printEvents() {
 	global $db;
-    $query2="SELECT * FROM events";
+    $query2="SELECT * FROM events ORDER BY time ASC";
 	$result = mysqli_query($db, $query2);
 	$user_id = $_SESSION['user']['user_id'];
 	print "<div class='eventList'>";
 		print "<h1>Tapahtumat</h1>";
 		while($row = mysqli_fetch_assoc($result)) {
 			$event_id = $row['event_id'];
+			$daysTill = "";
 			$num = 0;
 			print "<div class=eventItem>";
 			foreach($row as $ding) {
+				if($num == 4) {
+					$daysTill = countDays($ding, $event_id);
+					$time = strtotime($ding);
+					$formatTime = date("H:i d/m/Y", $time);
+					$ding = $formatTime;
+					print "<div class=event".$num.">";
+					print "<p>".$daysTill."</p>";
+					print "<p>".$ding."</p>";
+					print "</div>";
+				} elseif($num == 3) {
+					$addr = urlencode($ding);
+					print "<div class=event".$num.">";
+					print "<p></p><a href='https://www.google.com/maps/search/?api=1&query=".$addr."' target='_blank'>".$ding."</a></p>";
+					print "</div>";
+				} else {
+					print "<div class=event".$num.">";
+					print "<p>".$ding."</p>";
+					print "</div>";
+				}
 				
-				print "<div class=event".$num.">";
-				print "<p>".$ding."</p>";
-				print "</div>";
 				
 				$num++;
 			}
@@ -383,6 +400,24 @@ function printEvents() {
 		}
 	
 	print "</div>";
+}
+
+function countDays($time, $event_id) {
+	$formatTime = strtotime($time);
+	$date1 = new DateTime(date("d-m-Y", $formatTime));
+	$date2 = new DateTime(date("d-m-Y"));
+
+	$diff = date_diff($date2, $date1);
+	$diff = $diff->format("%r%a");
+	if($diff < 0 ) {
+		deleteEvent($event_id);
+	} elseif($diff == 0) {
+		return "Tänään";
+	} elseif ($diff == 1) {
+		return "Huomenna";
+	} else {
+		return $diff." päivän päästä";
+	}
 }
 
 function printOnlyEvents() {
@@ -520,10 +555,12 @@ if (isset($_POST['deleteEvent_btn'])) {
 	deleteEvent();
 }
 
-function deleteEvent() {
+function deleteEvent($event_id = "") {
 	global $db;
 
-	$event_id = e($_POST['event_id']);
+	if(isset($_POST['event_id'])) {
+		$event_id = e($_POST['event_id']);
+	}
 
 	$deleteQuery = "DELETE FROM events WHERE event_id='$event_id'";
 	$result = mysqli_query($db, $deleteQuery);
@@ -536,5 +573,9 @@ function generatePassword() {
 	$characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789!?&";
 	$generatedPassword = substr( str_shuffle($characters),0,8);
 	return $generatedPassword;
+}
+
+function checkEventDate() {
+	$today = now();
 }
 ?>
