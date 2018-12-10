@@ -5,6 +5,7 @@ session_start();
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
 // Declaring variables.
+$root 			= $_SERVER['DOCUMENT_ROOT'];
 $username 	  	= "";
 $email   	  	= "";
 $firstname 	  	= "";
@@ -343,12 +344,158 @@ function createEvent(){
 	}
 }
 
+function printEditEvent() {
+	global $db;
+	$event_id = $_GET['event_id'];
+	$query = "SELECT * FROM events Where event_id=$event_id";
+	$result = mysqli_query($db, $query);
+	$result = mysqli_fetch_assoc($result);
+	$eventType = $result['eventType'];
+	$description = $result['description'];
+	$location = $result['location'];
+	$time = $result['time'];
+	
+	$time = strtotime($time);
+	$time = date("Y-m-d\TH:i:s", $time);
+	//$time->format();
+
+	print <<<EOF
+	<section class="s1">
+	<div class="header">
+		<h2>Admin - Muokkaa Tapahtumaa</h2>
+	</div>
+	<div class="formBox">
+		<form method="post" action="../app/nimenhuuto/">
+
+		<?php echo display_error(); ?>
+
+			<div class="input-group">
+				<label for="eventType">Tapahtuma</label>
+				<select name="eventType" id="eventType" autofocus>
+					<option value="$eventType">$eventType</option>
+					<option value="Treeni">Treeni</option>
+					<option value="Peli">Matsi</option>
+				</select>
+			</div>
+			<div class="input-group">
+				<label for="desc">Kuvaus</label>
+				<input type="text" name="description" id="desc" value="$description">
+			</div>
+			<div class="input-group">
+				<label for="location">Sijainti</label>
+				<input type="text" name="location" id="location" value="$location">
+			</div>
+			<div class="input-group">
+				<label for="time">Aika</label>
+				<input type="datetime-local" name="time" id="time" value="$time">
+			</div>
+			<div class="input-group">
+				<input type="hidden" name="event_id" value="$event_id">
+				<button type="submit" class="btn formbutton" name="editEvent_btn">Muokkaa Tapahtumaa</button>
+			</div>
+		</form>
+	</div>
+	
+</section>
+EOF;
+}
+
+if(isset($_POST['editEvent_btn'])) {
+	editEvent();
+}
+
+function editEvent() {
+	global $db;
+	$event_id = e($_POST['event_id']);
+	$eventType = e($_POST['eventType']);
+	$description = e($_POST['description']);
+	$location = e($_POST['location']);
+	$time = e($_POST['time']);
+
+	$editQuery = "UPDATE events SET eventType='$eventType', description='$description', location='$location', time='$time' WHERE event_id='$event_id'";
+	$result = mysqli_query($db, $editQuery);
+}
+
 // Prints all the events from the database to a list.
 function printEvents() {
 	global $db;
-    $query2="SELECT * FROM events";
+    $query2="SELECT * FROM events ORDER BY time ASC";
 	$result = mysqli_query($db, $query2);
 	$user_id = $_SESSION['user']['user_id'];
+	print "<div class='eventList'>";
+		print "<h1>Tapahtumat</h1>";
+		while($row = mysqli_fetch_assoc($result)) {
+			$event_id = $row['event_id'];
+			$daysTill = "";
+			$num = 0;
+			print "<div class=eventItem>";
+			foreach($row as $ding) {
+				if($num == 4) {
+					$daysTill = countDays($ding, $event_id);
+					$time = strtotime($ding);
+					$formatTime = date("H:i d/m/Y", $time);
+					$ding = $formatTime;
+					print "<div class=event".$num.">";
+					print "<p>".$daysTill."</p>";
+					print "<p>".$ding."</p>";
+					print "</div>";
+				} elseif($num == 3) {
+					$addr = urlencode($ding);
+					print "<div class=event".$num.">";
+					print "<p></p><a href='https://www.google.com/maps/search/?api=1&query=".$addr."' target='_blank'>".$ding."</a></p>";
+					print "</div>";
+				} else {
+					print "<div class=event".$num.">";
+					print "<p>".$ding."</p>";
+					print "</div>";
+				}
+				
+				
+				$num++;
+			}
+			print "<div class='attendLists'>";
+			printAttendees($event_id);
+
+			printNotComing($event_id);
+
+			print "</div>";
+			echo "<div class='buttons'>";
+			
+			printDecisionButtons($user_id, $event_id);
+		
+			if(isAdmin()) {
+				printDeleteButton($event_id);
+			}
+			
+			print "</div>";
+			print "</div>";
+		}
+	
+	print "</div>";
+}
+
+function countDays($time, $event_id) {
+	$formatTime = strtotime($time);
+	$date1 = new DateTime(date("d-m-Y", $formatTime));
+	$date2 = new DateTime(date("d-m-Y"));
+
+	$diff = date_diff($date2, $date1);
+	$diff = $diff->format("%r%a");
+	if($diff < 0 ) {
+		deleteEvent($event_id);
+	} elseif($diff == 0) {
+		return "Tänään";
+	} elseif ($diff == 1) {
+		return "Huomenna";
+	} else {
+		return $diff." päivän päästä";
+	}
+}
+
+function printOnlyEvents() {
+	global $db;
+    $query2="SELECT * FROM events";
+	$result = mysqli_query($db, $query2);
 	print "<div class='eventList'>";
 		print "<h1>Tapahtumat</h1>";
 		while($row = mysqli_fetch_assoc($result)) {
@@ -363,20 +510,6 @@ function printEvents() {
 				
 				$num++;
 			}
-
-			printAttendees($event_id);
-
-			printNotComing($event_id);
-
-			echo "<div class='buttons'>";
-			
-			printDecisionButtons($user_id, $event_id);
-		
-			if(isAdmin()) {
-				printDeleteButton($event_id);
-			}
-			
-			print "</div>";
 			print "</div>";
 		}
 	print "</div>";
@@ -403,7 +536,8 @@ function printAttendees($event_id="") {
 	while($row = mysqli_fetch_assoc($result)) {
 		array_push($attendees, $row['user_id']);
 	}
-	echo "<div class='coming'><h5>Tulossa</h5>";
+	$count = count($attendees);
+	echo "<div class='coming'><h5><i class='far fa-thumbs-up'></i> ".$count."</h5>";
 	echo "<ul>";
 	foreach($attendees as $result) {
 		$query = "SELECT * FROM users WHERE user_id='$result'";
@@ -422,7 +556,8 @@ function printNotComing($event_id="") {
 	while($row = mysqli_fetch_assoc($result)) {
 		array_push($notAttending, $row['user_id']);
 	}
-	echo "<div class='notComing'><h5>Ei tulossa</h5>";
+	$count = count($notAttending);
+	echo "<div class='notComing'><h5><i class='far fa-thumbs-down'></i> ".$count."</h5>";
 	echo "<ul>";
 	foreach($notAttending as $result) {
 		$query = "SELECT * FROM users WHERE user_id='$result'";
@@ -435,10 +570,12 @@ function printNotComing($event_id="") {
 
 function printDeleteButton($event_id = "") {
 	print '
+		<button><a href="../../admin/editEvent.php?event_id='.$event_id.'">Muokkaa tapahtumaa</a></button>	
 		<form action="index.php" method="post">
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
-			<input type="submit" name="deleteEvent_btn" value="Delete event" >
+			<button class="deleteButton" type="submit" name="deleteEvent_btn">Poista tapahtuma</button>
 		</form> 
+		
 	';
 }
 
@@ -448,13 +585,17 @@ function printDecisionButtons($user_id = "", $event_id = "") {
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
 			<input type="hidden" name="user_id" value="'.$user_id.'" />
 			<input type="hidden" name="decision" value="imIn" />
-			<input type="submit" name="decision_btn" value="Im In" >
+			<button class="inButton" type="submit" name="decision_btn" >
+				<i class="far fa-thumbs-up"></i> IN
+			</button>
 		</form> 
 		<form action="index.php" method="post">
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
 			<input type="hidden" name="user_id" value="'.$user_id.'" />
 			<input type="hidden" name="decision" value="imOut" />
-			<input type="submit" name="decision_btn" value="Im Out" >
+			<button class="outButton" type="submit" name="decision_btn">
+				<i class="far fa-thumbs-down"></i> OUT
+			</button>
 		</form> 
 	';
 }
@@ -488,10 +629,12 @@ if (isset($_POST['deleteEvent_btn'])) {
 	deleteEvent();
 }
 
-function deleteEvent() {
+function deleteEvent($event_id = "") {
 	global $db;
 
-	$event_id = e($_POST['event_id']);
+	if(isset($_POST['event_id'])) {
+		$event_id = e($_POST['event_id']);
+	}
 
 	$deleteQuery = "DELETE FROM events WHERE event_id='$event_id'";
 	$result = mysqli_query($db, $deleteQuery);
@@ -504,5 +647,9 @@ function generatePassword() {
 	$characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789!?&";
 	$generatedPassword = substr( str_shuffle($characters),0,8);
 	return $generatedPassword;
+}
+
+function checkEventDate() {
+	$today = now();
 }
 ?>
