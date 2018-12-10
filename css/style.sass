@@ -176,18 +176,50 @@ input
     border: 1px solid red
     border-radius: 25px
     display: grid
-    grid-template-rows: repeat(4, auto)
+    grid-template-rows: repeat(5, auto)
     grid-template-columns: 1fr 1fr 1fr
-    grid-template-areas:    "eventType eventPlace eventTime""desc desc desc""buttons buttons buttons""attend attend attend"
+    grid-template-areas:    "fulldate fulldate fulldate""eventType desc desc ""eventTime eventTime eventPlace""buttons buttons buttons""attend attend attend"
     div
         a
             text-decoration: none
+    .event2 *, .event4 *
+        float: left
 .attendLists
     grid-area: attend
     display: grid
     grid-template-rows: 1fr
     grid-template-columns: 1fr 1fr
     grid-template-areas: "coming notComing"
+
+.day
+    margin: 0 0 0 5px
+    float: left
+    clear: both
+    font-size: 2em
+    
+.month
+    margin: 0 0 0 5px
+    float: left
+    clear: both
+
+.daycount
+    float: left
+    clear: both
+    margin: 5px
+
+.date
+    float: left
+    clear: both
+
+.fulldate
+    grid-area: fulldate
+    margin: 0 auto
+    p 
+        margin: 5px
+
+.dayAndMonth
+    width: 100%
+    background-image: linear-gradient(to top left, rgba(255,0,0,0), rgba(255,0,0,0.25), rgba(255,0,0,0.8))
 
 .inButton
     width: 46%
@@ -236,6 +268,7 @@ input
     background-color: #FF0000
     color: white
 .deleteButton
+    width: 45%
     color: #FF0000
     background: transparent
     border: 2px solid #FF0000
@@ -261,9 +294,13 @@ input
     display: none
 .event1 
     grid-area: eventType
+    p 
+        margin: 5px
 
 .event2
     grid-area: desc
+    p 
+        margin: 5px
 
 .event3
     grid-area: eventPlace
@@ -305,7 +342,30 @@ input
         display: inline
         float: center
 
-
+.editButton
+    width: 45%
+    background: transparent
+    border: 2px solid #FF0000
+    border-radius: 6px
+    border: none
+    color: white
+    padding: 5px 5px
+    text-align: center
+    display: inline-block
+    font-size: 16px
+    margin: 4px 2px
+    -webkit-transition-duration: 0.4s
+    transition-duration: 0.4s
+    cursor: pointer
+    text-decoration: none
+    text-transform: uppercase
+    color: black
+    border: 2px solid #FF0000
+    a
+        color: inherit
+.editButton:hover
+    background-color: #FF0000
+    color: white
 
 .topnav 
     overflow: hidden
