@@ -1,20 +1,23 @@
 <?php
     require "../header.php";
+    require "dir.php"
 ?>
     <section class="s1">
+    <h1>Galleria</h1>
+    <?php 
+    $array = createArray();
+    ?>
         <div class="gallery">
             <div class="main-img">
-                <img src='http://localhost/project_1/app/images/uploads/img8.jpg' id="current">
+                <img src='http://localhost/project_1/app/images/uploads/<?php echo $array[0]?>' id="current">
             </div>
             <div class="images">
-                <img src='http://localhost/project_1/app/images/uploads/img8.jpg'>
-                <img src='http://localhost/project_1/app/images/uploads/img7.jpg'>
-                <img src='http://localhost/project_1/app/images/uploads/img6.jpeg'>
-                <img src='http://localhost/project_1/app/images/uploads/img5.jpeg'>
-                <img src='http://localhost/project_1/app/images/uploads/img4.jpeg'>
-                <img src='http://localhost/project_1/app/images/uploads/img3.jpeg'>
-                <img src='http://localhost/project_1/app/images/uploads/img2.jpeg'>
-                <img src='http://localhost/project_1/app/images/uploads/img1.jpeg'>
+                <?php 
+                    foreach($array as $name){
+                        echo "<img src='http://localhost/project_1/app/images/uploads/".$name."'>";
+                    }
+                ?>
+
             </div>
         </div>
         <script src="http://localhost/project_1/app/galleria/galleryjs.js"></script>
@@ -22,7 +25,7 @@
     if (isAdmin()) {
     ?>
         <form action="upload.php" method="post" enctype="multipart/form-data">
-            Select image to upload: <input type="file" name="fileToUpload" id="fileToUpload">
+            Select image to upload: <input name="upload[]" type="file" multiple="multiple" />
             <input type="submit" value="Upload Image" name="submit">
         </form>
     <?php  
