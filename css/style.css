@@ -394,6 +394,10 @@ input {
 }
 
 @media screen and (max-width: 700px) {
+  section .motto {
+    font-size: 60px;
+  }
+
   .topnav a {
     display: none;
   }
