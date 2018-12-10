@@ -427,6 +427,7 @@ function printEvents() {
 		while($row = mysqli_fetch_assoc($result)) {
 			$event_id = $row['event_id'];
 			$daysTill = "";
+			$doing = "";
 			$num = 0;
 			print "<div class=eventItem>";
 			foreach($row as $ding) {
@@ -434,10 +435,14 @@ function printEvents() {
 					$daysTill = countDays($ding, $event_id);
 					$time = strtotime($ding);
 					$formatTime = date("H:i d/m/Y", $time);
-					$ding = $formatTime;
+					$dayMonth = getDayMonth($time);
+					$doing = $formatTime;
 					print "<div class=event".$num.">";
-					print "<p>".$daysTill."</p>";
-					print "<p>".$ding."</p>";
+					print "
+					<div class='dayAndMonth'><p class='day'>$dayMonth[1].</p><p class='month'>$dayMonth[0]</p></div>
+					";
+					print "<p class='daycount'>".$daysTill."</p>";
+					
 					print "</div>";
 				} elseif($num == 3) {
 					$addr = urlencode($ding);
@@ -453,6 +458,8 @@ function printEvents() {
 				
 				$num++;
 			}
+			print "<div class='fulldate'><p class='date'>".$doing."</p></div>";
+
 			print "<div class='attendLists'>";
 			printAttendees($event_id);
 
@@ -490,6 +497,51 @@ function countDays($time, $event_id) {
 	} else {
 		return $diff." päivän päästä";
 	}
+}
+
+function getDayMonth($time = "") {
+	$month = date("M", $time);
+	switch($month) {
+		case 'Jan':
+			$month = "Tammi";
+			break;
+		case 'Feb':
+			$month = "Helmi";
+			break;
+		case 'Mar':
+			$month = "Maalis";
+			break;
+		case 'Apr':
+			$month = "Huhti";
+			break;
+		case 'May':
+			$month = "Touko";	
+			break;
+		case 'Jun':
+			$month = "Kesä";
+			break;
+		case 'Jul':
+			$month = "Heinä";
+			break;
+		case 'Aug':
+			$month = "Elo";
+			break;
+		case 'Sep':
+			$month = "Syys";
+			break;
+		case 'Oct':
+			$month = "Loka";
+			break;
+		case 'Nov':
+			$month = "Marras";
+			break;
+		case 'Dec':
+			$month = "Joulu";	
+			break;
+	}
+	$day = date("d", $time);
+	
+	return array($month, $day);
 }
 
 function printOnlyEvents() {
@@ -570,7 +622,7 @@ function printNotComing($event_id="") {
 
 function printDeleteButton($event_id = "") {
 	print '
-		<button><a href="../../admin/editEvent.php?event_id='.$event_id.'">Muokkaa tapahtumaa</a></button>	
+		<button class="editButton"><a href="../../admin/editEvent.php?event_id='.$event_id.'">Muokkaa tapahtumaa</a></button>	
 		<form action="index.php" method="post">
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
 			<button class="deleteButton" type="submit" name="deleteEvent_btn">Poista tapahtuma</button>
