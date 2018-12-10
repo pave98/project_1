@@ -5,6 +5,7 @@
 body
     background-image: url("/project_1/app/images/background.jpg")
     background-size: 100%
+    font-family: 'Work Sans', sans-serif
 
 .container
     
@@ -52,6 +53,8 @@ section
 
     .motto
         font-size: 100px
+
+
 
 .gallery
     max-width: 760px
@@ -132,13 +135,45 @@ form
         input, select, textarea
             color: black
 
+.formBox
+    width: 50%
+    margin: 10px auto
+
+input[type=text],input[type=email] ,input[type=password] , select 
+
+    padding: 12px 20px
+    margin: 10px 0 8px
+    display: inline-block
+    border: 1px solid #ccc
+    border-radius: 4px
+.formbutton
+    min-width: 120px
+    width: 33%
+    background-color: #4CAF50
+    color: white
+    padding: 14px 20px
+    margin: 8px 0
+    border: none
+    border-radius: 4px
+    cursor: pointer
+.formbutton:hover 
+    background-color: #45a049
+
+label
+    float: left
+    width: 100%
+
+input
+    width: 70%
+
+
 .eventItem
     height: auto
     box-shadow: 10px 5px #a7700b
     background-color: rgba(215,144,14, .5)
     width: 100%
     max-width: 500px
-    margin: 5px auto 5px auto
+    margin: 5px auto 10px auto
     padding: 5px
     border: 1px solid red
     border-radius: 25px
@@ -146,6 +181,9 @@ form
     grid-template-rows: repeat(4, auto)
     grid-template-columns: 1fr 1fr 1fr
     grid-template-areas:    "eventType eventPlace eventTime""desc desc desc""buttons buttons buttons""attend attend attend"
+    div
+        a
+            text-decoration: none
 .attendLists
     grid-area: attend
     display: grid
@@ -299,7 +337,9 @@ form
     display: none
 
 
-@media screen and (max-width: 650px) 
+@media screen and (max-width: 700px) 
+
+
 
 
     .topnav a 
@@ -323,11 +363,6 @@ form
     
     .container
         width: 100%
-
-    .s1
-        *
-            width: 100%
-            height: auto
     header
         display: grid
         width: 100%

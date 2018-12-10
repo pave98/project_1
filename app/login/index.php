@@ -8,23 +8,24 @@
         <div class="header">
             <h2>Login</h2>
         </div>
+        <div class="formBox">
+            <form method="post" action="">
+                <!-- Display validation errors here -->
+                <?php echo display_error(); ?>
 
-        <form method="post" action="">
-            <!-- Display validation errors here -->
-            <?php echo display_error(); ?>
-
-            <div class="input-group">
-                <label>Username</label><br>
-                <input type="text" name="username" autofocus>
-            </div>
-            <div class="input-group">
-                <label>Password</label><br>
-                <input type="password" name="password"><br><br>
-            </div>
-            <div class="input-group">
-                <button type="submit" name="login_btn" class="btn">Login</button>
-            </div>
-        </form>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" autofocus>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="input-group">
+                    <button type="submit" name="login_btn" class="btn formbutton">Login</button>
+                </div>
+            </form>
+        </div>
         <p><a href="resetPassword.php">Unohtuiko salasana?</a></p>
     </section>
     

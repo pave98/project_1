@@ -7,25 +7,31 @@
     }
 ?>
     <section class="s1">
-        <form method="post" action="">
+        <div class="formBox">
+            <form method="post" action="">
 
-            <!-- Display validation errors here -->
-            <?php echo display_error(); ?>
+                <!-- Display validation errors here -->
+                <?php echo display_error(); ?>
 
-            <h1>Change password</h1>
-            <div class="input-group">
-                <input type="password" name="oldPassword" placeholder="Old Password" required autofocus>
-            </div>
-            <div class="input-group">
-                <input type="password" name="newPassword" placeholder="New Password" required>
-            </div>
-            <div class="input-group">
-                <input type="password" name="newPassword2" placeholder="Retype New Password" required>
-            </div>
-            <div class="input-group">
-                <input type="submit" name="reset_btn" value="Reset Password">
-            </div>
-        </form>
+                <h1>Vaihda salasana</h1>
+                <div class="input-group">
+                    <label for="oldpassword"> Vanha salasana</label>
+                    <input type="password" id="oldpassword" name="oldPassword" required autofocus>
+                </div>
+                <div class="input-group">
+                    <label for="newpassword">Uusi salasana</label>
+                    <input type="password" id="newpassword" name="newPassword"  required>
+                </div>
+                <div class="input-group">
+                    <label for="newpassword2">Kirjoita uusi salasana uudelleen</label>
+                    <input type="password" id="newpassword2" name="newPassword2" required>
+                </div>
+                <div class="input-group">
+                    <button class="btn formbutton" type="submit" name="reset_btn">Vaihda salasana</button>
+                </div>
+            </form>
+        </div>
+        
     </section>
     
 <?php
