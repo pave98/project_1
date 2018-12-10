@@ -344,6 +344,78 @@ function createEvent(){
 	}
 }
 
+function printEditEvent() {
+	global $db;
+	$event_id = $_GET['event_id'];
+	$query = "SELECT * FROM events Where event_id=$event_id";
+	$result = mysqli_query($db, $query);
+	$result = mysqli_fetch_assoc($result);
+	$eventType = $result['eventType'];
+	$description = $result['description'];
+	$location = $result['location'];
+	$time = $result['time'];
+	
+	$time = strtotime($time);
+	$time = date("Y-m-d\TH:i:s", $time);
+	//$time->format();
+
+	print <<<EOF
+	<section class="s1">
+	<div class="header">
+		<h2>Admin - Muokkaa Tapahtumaa</h2>
+	</div>
+	<div class="formBox">
+		<form method="post" action="../app/nimenhuuto/">
+
+		<?php echo display_error(); ?>
+
+			<div class="input-group">
+				<label for="eventType">Tapahtuma</label>
+				<select name="eventType" id="eventType" autofocus>
+					<option value="$eventType">$eventType</option>
+					<option value="Treeni">Treeni</option>
+					<option value="Peli">Matsi</option>
+				</select>
+			</div>
+			<div class="input-group">
+				<label for="desc">Kuvaus</label>
+				<input type="text" name="description" id="desc" value="$description">
+			</div>
+			<div class="input-group">
+				<label for="location">Sijainti</label>
+				<input type="text" name="location" id="location" value="$location">
+			</div>
+			<div class="input-group">
+				<label for="time">Aika</label>
+				<input type="datetime-local" name="time" id="time" value="$time">
+			</div>
+			<div class="input-group">
+				<input type="hidden" name="event_id" value="$event_id">
+				<button type="submit" class="btn formbutton" name="editEvent_btn">Muokkaa Tapahtumaa</button>
+			</div>
+		</form>
+	</div>
+	
+</section>
+EOF;
+}
+
+if(isset($_POST['editEvent_btn'])) {
+	editEvent();
+}
+
+function editEvent() {
+	global $db;
+	$event_id = e($_POST['event_id']);
+	$eventType = e($_POST['eventType']);
+	$description = e($_POST['description']);
+	$location = e($_POST['location']);
+	$time = e($_POST['time']);
+
+	$editQuery = "UPDATE events SET eventType='$eventType', description='$description', location='$location', time='$time' WHERE event_id='$event_id'";
+	$result = mysqli_query($db, $editQuery);
+}
+
 // Prints all the events from the database to a list.
 function printEvents() {
 	global $db;
@@ -502,6 +574,7 @@ function printDeleteButton($event_id = "") {
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
 			<button class="deleteButton" type="submit" name="deleteEvent_btn">Poista tapahtuma</button>
 		</form> 
+		<button><a href="../../admin/editEvent.php?event_id='.$event_id.'">Muokkaa tapahtumaa</a></button>
 	';
 }
 
