@@ -53,16 +53,18 @@
             return $this->position;
         }
         function printHead(){
-            print'<h1> #'.$this->getNumber().' '.$this->getLname().'</h1>';
+            print'<h1 class="mediumH1"> #'.$this->getNumber().' '.$this->getLname().'</h1>';
         }
         function printPic(){
             print"<div class='imgwrapper'><img src='http://localhost/project_1/app/images/grozersmol.jpg' alt='grözer'></div><br>";
         }
         function printStats(){
+            print "<p class='stats'>";
             print "Nimi: ".$this->getFname()." ".$this->getLname()."<br>";
             print "Pituus: ".$this->getHeight()."<br>";
             print "Ulottuvuus: ".$this->getReach()."<br>";
             print "Pelipaikka: ".$this->getPosition()."<br>";
+            print "</p>";
             
         }
     }
@@ -74,6 +76,7 @@
     $mikkonen = new Player("9", "Ilkka", "Mikkonen(A)", "176", "350", "Passari");
     $nevalainen = new Player("10", "Ari", "Nevalainen", "180", "300", "Yleispelaaja");
     $virtanen = new Player("29", "Jasperi", "Virtanen", "200", "305", "Keskitorjuja");
+    $hommo = new Player("32", "Jyri", "Hömmö", "174", "250", "Libero");
 
-    $players = array($keinonen, $poyhonen, $koskinen, $saviahde, $mehto, $mikkonen, $nevalainen, $virtanen);
+    $players = array($keinonen, $poyhonen, $koskinen, $saviahde, $mehto, $mikkonen, $nevalainen, $virtanen, $hommo);
 ?>
