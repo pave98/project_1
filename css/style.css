@@ -56,11 +56,13 @@ section .motto {
   font-size: 100px;
 }
 section .bodyContainer {
-  border: solid 1px red;
-  max-width: 920px;
+  max-width: 1200px;
+  margin-left: 3%;
+  width: 1200px;
 }
 section h1 {
-  font-size: 60px;
+  font-size: 80px;
+  margin-bottom: 0px;
 }
 
 .gallery {
@@ -102,19 +104,20 @@ section h1 {
 }
 
 .players {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
   margin-top: 5px;
   width: 100%;
-  border: solid 1px red;
   height: auto;
 }
 
 .player {
   float: left;
   height: auto;
-  width: 50%;
-  border: solid 1px red;
+  width: 100%;
   text-align: left;
-  margin: 0 3% 0 3%;
+  margin: 0 3% 0 1%;
 }
 .player h1 {
   margin-top: 5px;
@@ -127,9 +130,32 @@ section h1 {
   height: auto;
 }
 
-.intro {
-  margin: 10px;
+.player2 {
+  margin-left: -10%;
+}
+
+.stats {
+  margin-top: -10px;
+}
+
+.nonCentered {
   text-align: left;
+  margin-bottom: 3%;
+}
+
+.intro {
+  margin-left: 5px;
+  text-align: left;
+  max-width: 1100px;
+}
+
+.mediumH1 {
+  font-size: 60px;
+  margin-bottom: 1%;
+}
+
+p {
+  font-size: 2em;
 }
 
 aside {
@@ -482,6 +508,10 @@ input {
 }
 
 @media screen and (max-width: 700px) {
+  .players {
+    grid-template-columns: repeat(1fr, 1);
+  }
+
   section .motto {
     font-size: 60px;
   }
