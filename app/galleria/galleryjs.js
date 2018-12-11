@@ -24,4 +24,3 @@ function imageClicked(e){
     //Sets the opacity to the constant
     e.target.style.opacity = opacity;
 }
-console.log("wittue mitae paskaa");
