@@ -57,11 +57,14 @@ section .motto {
 }
 section .bodyContainer {
   max-width: 1200px;
-  margin-left: 3%;
-  width: 1200px;
+  padding-left: 3%;
+  width: 100%;
 }
 section h1 {
-  font-size: 80px;
+  margin: 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   margin-bottom: 0px;
 }
 
@@ -109,7 +112,9 @@ section h1 {
   grid-gap: 5px;
   margin-top: 5px;
   width: 100%;
-  height: auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .player {
@@ -126,12 +131,8 @@ section h1 {
   max-width: 420px;
 }
 .player .imgwrapper img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
-}
-
-.player2 {
-  margin-left: -10%;
 }
 
 .stats {
@@ -227,7 +228,7 @@ label {
 }
 
 input {
-  width: 70%;
+  width: 100%;
 }
 
 .error, .msg {
@@ -536,12 +537,16 @@ input {
 }
 
 @media screen and (max-width: 700px) {
-  .players {
-    grid-template-columns: repeat(1fr, 1);
+  .mediumH1 {
+    font-size: 35px;
   }
 
-  section .motto {
-    font-size: 60px;
+  h1 {
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 20px;
   }
 
   .topnav a {
@@ -574,10 +579,6 @@ input {
     width: 100%;
   }
 
-  .container {
-    width: 100%;
-  }
-
   header {
     display: grid;
     width: 100%;
@@ -597,9 +598,41 @@ input {
   header img {
     height: 150px;
   }
+
+  section, .s1 {
+    padding: 5%;
+    width: 100%;
+  }
+  section .bodyContainer, .s1 .bodyContainer {
+    padding: 0;
+  }
+
+  section .motto {
+    font-size: 60px;
+  }
 }
 @media screen and (max-width: 765px) {
   .topnav a {
     font-size: 1.75em;
+  }
+}
+@media screen and (max-width: 980px) {
+  .players {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;
+    margin-top: 5px;
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .players .player {
+    float: none;
+    margin: auto;
+    text-align: center;
+  }
+  .players .player .imgwrapper {
+    margin: auto;
   }
 }
