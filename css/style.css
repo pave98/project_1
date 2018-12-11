@@ -59,6 +59,9 @@ section .bodyContainer {
   border: solid 1px red;
   max-width: 920px;
 }
+section h1 {
+  font-size: 60px;
+}
 
 .gallery {
   max-width: 760px;
@@ -108,7 +111,7 @@ section .bodyContainer {
 .player {
   float: left;
   height: auto;
-  width: 40%;
+  width: 50%;
   border: solid 1px red;
   text-align: left;
   margin: 0 3% 0 3%;
