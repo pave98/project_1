@@ -11,6 +11,8 @@
         print   "
                 <a href='../../admin/create_event.php'>Lisää tapahtuma</a>
                 ";
+
+            echo display_msg();
     }?>
         <?php printEvents() ?>
     </section>

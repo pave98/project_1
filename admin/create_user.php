@@ -12,7 +12,10 @@
         <div class="formBox">
             <form method="post" action="create_user.php">
 
-            <?php echo display_error(); ?>
+            <?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
 
                 <div class="input-group">
                     <label for="username">Käyttäjätunnus</label>
