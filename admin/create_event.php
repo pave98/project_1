@@ -12,8 +12,10 @@
         <div class="formBox">
             <form method="post" action="create_event.php">
 
-            <?php echo display_error(); ?>
-
+            <?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
                 
                 <div class="input-group">
                     <label for="eventType">Tapahtuma</label>

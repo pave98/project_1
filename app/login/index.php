@@ -11,8 +11,10 @@
         <div class="formBox">
             <form method="post" action="">
                 <!-- Display validation errors here -->
-                <?php echo display_error(); ?>
-
+                <?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
                 <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" autofocus>

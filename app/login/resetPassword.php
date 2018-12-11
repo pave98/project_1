@@ -10,7 +10,10 @@
         <div class="formBox">
             <form method="post" action="index.php">
 
-            <?php echo display_error(); ?>
+            <?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
 
                 <div class="input-group">
                     <label for="email">Sähköposti</label>

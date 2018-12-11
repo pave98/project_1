@@ -230,6 +230,32 @@ input {
   width: 70%;
 }
 
+.error, .msg {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 12px;
+  border-radius: 0.5em;
+  -webkit-box-shadow: 1px 1px 3px #888;
+          box-shadow: 1px 1px 3px #888;
+}
+.error i, .msg i {
+  margin: 10px 22px;
+  font-size: 2em;
+  vertical-align: middle;
+}
+
+.error {
+  color: #D8000C;
+  background-color: #FFD2D2;
+}
+
+.msg {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+}
+
 .eventItem {
   height: auto;
   -webkit-box-shadow: 10px 5px #a7700b;
@@ -487,6 +513,7 @@ input {
 .topnav a {
   float: left;
   display: block;
+  border-radius: 0.5em;
   color: #f2f2f2;
   text-align: center;
   padding: 10px 11px;

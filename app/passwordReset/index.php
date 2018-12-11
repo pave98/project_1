@@ -8,10 +8,13 @@
 ?>
     <section class="s1">
         <div class="formBox">
-            <form method="post" action="">
+            <form method="post" action="../index.php">
 
                 <!-- Display validation errors here -->
-                <?php echo display_error(); ?>
+
+                <?php   echo display_error(); 
+                        echo display_msg();
+                ?>
 
                 <h1>Vaihda salasana</h1>
                 <div class="input-group">
