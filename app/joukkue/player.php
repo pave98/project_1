@@ -53,7 +53,7 @@
             return $this->position;
         }
         function printHead(){
-            print'<h1 class="mediumH1"> #'.$this->getNumber().' '.$this->getLname().'</h1>';
+            print'<h1 class="introH1"> #'.$this->getNumber().' '.$this->getLname().'</h1>';
         }
         function printPic(){
             print"<div class='imgwrapper'><img src='http://localhost/project_1/app/images/grozersmol.jpg' alt='grözer'></div><br>";
