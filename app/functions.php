@@ -5,6 +5,7 @@ session_start();
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
 // Declaring variables.
+
 $root 			= $_SERVER['DOCUMENT_ROOT'];
 $username 	  	= "";
 $email   	  	= "";
