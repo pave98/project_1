@@ -158,6 +158,36 @@ section h1 {
   margin-left: 0em;
 }
 
+.deleteUserButton {
+  width: 100%;
+  background: transparent;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  padding: 2px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+  border: 2px solid #FF0000;
+}
+
+.deleteUserButton:hover {
+  background-color: #FF0000;
+  color: white;
+}
+
+.removeLink {
+  text-decoration: none;
+  color: inherit;
+}
+
 .mediumH1 {
   font-size: 5em;
   margin-bottom: 1%;
@@ -545,7 +575,7 @@ input {
   display: none;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 870px) {
   .mediumH1 {
     font-size: 35px;
   }
