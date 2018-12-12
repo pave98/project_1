@@ -85,23 +85,6 @@ section h1 {
   grid-gap: 5px;
 }
 
-@-webkit-keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-.fade-in {
-  opacity: 0;
-  -webkit-animation: fadeIn 0.5s ease-in 1 forwards;
-          animation: fadeIn 0.5s ease-in 1 forwards;
-}
-
 .teamheader {
   margin: 5px 0;
 }
@@ -646,6 +629,14 @@ input {
 
   h1.mediumH1 {
     text-align: left;
+  }
+
+  #current {
+    display: none;
+  }
+
+  .images {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 @media screen and (max-width: 765px) {

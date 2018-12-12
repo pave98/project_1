@@ -78,14 +78,6 @@ section
     grid-template-columns: repeat(4, 1fr)
     grid-gap: 5px
 
-//fade in animation for gallery
-@keyframes fadeIn 
-    to
-        opacity: 1
-.fade-in
-    opacity: 0
-    animation: fadeIn 0.5s ease-in 1 forwards
-
 .teamheader
     margin: 5px 0
 
@@ -525,6 +517,22 @@ input
     
     h1.mediumH1
         text-align: left
+
+    #current
+            display: none
+    
+    .images
+        grid-template-columns: repeat(1, 1fr)
+    
+    @media screen and (min-width: 471px)
+        //fade in animation for gallery
+            @keyframes fadeIn 
+                to
+                    opacity: 1
+            .fade-in
+                opacity: 0
+                animation: fadeIn 0.5s ease-in 1 forwards
+
 
 
 
