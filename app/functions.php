@@ -612,7 +612,7 @@ function printNews() {
     $query="SELECT * FROM news";
 	$result = mysqli_query($db, $query);
 	print "<div class='newsList'>";
-		print "<h1>Uutiset</h1>";
+		print "<h1>Ajankohtaista</h1>";
 		while($row = mysqli_fetch_assoc($result)) {
 			$news_id = $row['news_id'];
 			$num = 0;
@@ -641,7 +641,7 @@ function printNews() {
 
 function printNewsButtons($news_id = "") {
 	print '
-		<a class="removeLink" href="../admin/editNews.php?news_id='.$news_id.'"><button class="editButton">Muokkaa tapahtumaa</button></a>	
+		<a class="removeLink" href="../admin/editNews.php?news_id='.$news_id.'"><button class="editButton">Muokkaa uutista</button></a>	
 		<form action="index.php" method="post">
 			<input type="hidden" name="news_id" value="'.$news_id.'" />
 			<button class="deleteButton" type="submit" name="deleteNews_btn">Poista uutinen</button>
@@ -679,7 +679,7 @@ function printEditNews() {
 			</div>
 			<div class="input-group">
 				<label for="news_article">Uutisen sisältö</label>
-				<textarea rows="4" cols="40" name="news_article" id="news_article" value="$news_article"></textarea>
+				<textarea rows="4" cols="40" name="news_article" id="news_article" >$news_article</textarea>
 			</div>
 
 			<div class="input-group">
