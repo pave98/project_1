@@ -5,6 +5,7 @@ session_start();
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
 // Declaring variables.
+
 $root 			= $_SERVER['DOCUMENT_ROOT'];
 $username 	  	= "";
 $email   	  	= "";
@@ -93,13 +94,12 @@ if (isset($_POST['deleteUser_btn'])) {
 function deleteUser() {
 	global $db, $errors, $messages;
 
-	$username = e($_POST['username']);
-	if($_SESSION['user']['username'] == $username) {
+	$user_id = e($_POST['user_id']);
+	if($_SESSION['user']['user_id'] == $user_id) {
 		array_push($errors, "WHY ARE YOU DELETING YOURSELF!!?!?!?!");
 	} else {
-		$query = "DELETE FROM users WHERE username='$username'";
+		$query = "DELETE FROM users WHERE user_id='$user_id'";
 		if (mysqli_query($db, $query)) {
-			array_push($errors, "DELETED"); 
 			array_push($messages, "Käyttäjä poistettu.");
 		} else {
 			echo "Error deleting record: " . mysqli_error($db);
@@ -232,17 +232,40 @@ if (isset($_GET['logout'])) {
 // Prints all the users from users database to a list.
 function printUsers() {
 	global $db;
-    $query2="SELECT * FROM users";
+	$user_id = "";
+    $query2="SELECT user_id, username, user_type, email, firstName, lastName FROM users";
 	$result = mysqli_query($db, $query2);
-
-	print "<div class='userList'>";
-		print "<h2>Käyttäjälista</h2>";
-		print "<h3>";
-		while($row = mysqli_fetch_array($result)){
-			print "<p>".$row['username']."</p>";
+	print "<h2>Käyttäjälista</h2>";
+	print
+		"<table class='userList'>
+		<tr>
+			<th>Käyttäjätunnus</th>
+			<th>Käyttäjätyyppi</th>
+			<th>Sähköposti</th>
+			<th>Etunimi</th>
+			<th>Sukunimi</th>
+		</tr>	
+		";
+		while($row = mysqli_fetch_row($result)){
+			$user_id = $row[0];
+			$check = true;
+			print "<tr>";
+			foreach($row as $value) {
+				if(!$check) {
+					print "<td>".$value."</td>";
+				} else {
+					$check = false;
+				}
+				
+			}
+			print <<<EOF
+			<td><form action="" method="post">
+			<input type="hidden" name="user_id" value="$user_id" />
+			<button class="deleteUserButton" type="submit" name="deleteUser_btn">Poista käyttäjä</button></form></td>
+EOF;
+			print "</tr>";
 		}
-		print "</h3>";
-	print "</div>";
+	print "</table>";
 }
 
 // call resetPassword() function.
@@ -288,6 +311,9 @@ function resetPassword() {
 		}
 	}
 }
+
+
+
 
 // call passwordReset() function.
 if (isset($_POST['resetPassword_btn'])) {

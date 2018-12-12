@@ -1,5 +1,8 @@
     <?php 
     include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/functions.php');
+
+    $loc2 = "";
+    echo $loc2;
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,12 +58,12 @@
                     // switches between login and logout links depending if a user is logged in or out.
                     if(empty($_SESSION['user'])){
                         print "
-                            <a href='/project_1/app/login/index.php'>Login</a>
+                            <a href='/project_1/app/login/index.php'>Kirjautuminen</a>
                             ";
                     } else {
                         print "
-                            <a href=\"/project_1/app/index.php?logout='1'\">Logout</a>
-                            <a href='/project_1/app/passwordReset/'>Reset</a>
+                            <a href=\"/project_1/app/index.php?logout='1'\">Kirjaudu ulos</a>
+                            <a href='/project_1/app/passwordReset/'>Vaihda salasana</a>
                             ";     
                     }
                 ?>
