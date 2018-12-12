@@ -820,10 +820,10 @@ function printNotComing($event_id="") {
 
 function printDeleteButton($event_id = "") {
 	print '
-		<button class="editButton"><a href="../../admin/editEvent.php?event_id='.$event_id.'">Muokkaa tapahtumaa</a></button>	
+		<button class="editButton eventButton"><a href="../../admin/editEvent.php?event_id='.$event_id.'">Muokkaa tapahtumaa</a></button>	
 		<form action="index.php" method="post">
 			<input type="hidden" name="event_id" value="'.$event_id.'" />
-			<button class="deleteButton" type="submit" name="deleteEvent_btn">Poista tapahtuma</button>
+			<button class="deleteButton  eventButton" type="submit" name="deleteEvent_btn">Poista tapahtuma</button>
 		</form> 
 		
 	';
