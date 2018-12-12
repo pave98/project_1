@@ -193,6 +193,10 @@ input {
   width: 70%;
 }
 
+.contact {
+  padding-top: 50px;
+}
+
 .eventItem {
   height: auto;
   -webkit-box-shadow: 10px 5px #a7700b;
@@ -225,14 +229,14 @@ input {
 }
 
 .day {
-  margin: 0 0 0 10px;
+  margin: 0 0 0 15px;
   float: left;
   clear: both;
   font-size: 2em;
 }
 
 .month {
-  margin: 0 0 0 10px;
+  margin: 0 0 0 15px;
   float: left;
   clear: both;
 }
@@ -240,7 +244,7 @@ input {
 .daycount {
   float: left;
   clear: both;
-  margin: 5px;
+  margin: 5px 5px 5px 15px;
 }
 
 .date {

@@ -16,13 +16,16 @@
 
         <?php echo display_error(); ?>
 
-            <div class="input-group">
-                <label>Username</label>
-                <input type="text" name="username" value="<?php echo $username; ?>" autofocus>
+            <div class="formBox">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" name="username" value="<?php echo $username; ?>" autofocus>
+                </div>
+                <div class="input-group">
+                    <button type="submit" class="btn  formbutton" name="deleteUser_btn">Delete user</button>
+                </div>
             </div>
-            <div class="input-group">
-                <button type="submit" class="btn" name="deleteUser_btn">Delete user</button>
-            </div>
+            
         </form>
     </section>
 <?php

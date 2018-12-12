@@ -232,7 +232,7 @@ if (isset($_POST['reset_btn'])) {
 
 // Resets the password of the current user.
 function resetPassword() {
-	global $db, $username, $errors;
+	global $db, $username, $errors, $;
 
 	$oldPassword = e($_POST['oldPassword']);
 	$newPassword = e($_POST['newPassword']);
