@@ -624,6 +624,11 @@ function printNews() {
 					print "<div class=news".$num.">";
 					print "<p>Luotu: ".$formatTime."</p>";
 					print "</div>";
+
+				} elseif($num == 3) {
+					print "<div class=news".$num.">";
+					print "<pre>".$ding."</pre>";
+					print "</div>";
 				} else {
 					print "<div class=news".$num.">";
 					print "<p>".$ding."</p>";

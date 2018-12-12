@@ -68,15 +68,15 @@
             
         }
     }
-    $keinonen = new Player("1", "Niko", "Hienonen(C)", "183", "300", "Hakkuri/Yleispelaaja");
-    $poyhonen = new Player("2", "Riku", "Pöyhönen", "180", "305", "Hakkuri/Yleispelaaja");
-    $koskinen = new Player("3", "Antti", "Koskinen", "178", "285", "Yleispelaaja");
-    $saviahde = new Player("7", "Jarno", "Saviahde", "189", "307", "Keskitorjuja");
-    $mehto = new player("8", "Jyrki", "Mehto", "175", "345", "Passari");
-    $mikkonen = new Player("9", "Ilkka", "Mikkonen(A)", "176", "350", "Passari");
-    $nevalainen = new Player("10", "Ari", "Nevalainen", "180", "300", "Yleispelaaja");
-    $virtanen = new Player("29", "Jasperi", "Virtanen", "200", "305", "Keskitorjuja");
-    $hommo = new Player("32", "Jyri", "Hömmö", "174", "250", "Libero");
+    $grozer = new Player("1", "Györg", "Grözer(C)", "183", "300", "Hakkuri/Yleispelaaja");
+    $fromm = new Player("2", "Christian", "Fromm", "180", "305", "Hakkuri/Yleispelaaja");
+    $schott = new Player("3", "Ruben", "Schott", "178", "285", "Yleispelaaja");
+    $bohme = new Player("7", "Marcus", "Böhme", "189", "307", "Keskitorjuja");
+    $kampa = new player("8", "Lukas", "Kampa", "175", "345", "Passari");
+    $zimmer = new Player("9", "Jan", "Zimmer(A)", "176", "350", "Passari");
+    $kaliberda = new Player("10", "Denys", "Kaliberda", "180", "300", "Yleispelaaja");
+    $krick = new Player("29", "Tobias", "Krick", "200", "305", "Keskitorjuja");
+    $zenger = new Player("32", "Julian", "Zenger", "174", "250", "Libero");
 
-    $players = array($keinonen, $poyhonen, $koskinen, $saviahde, $mehto, $mikkonen, $nevalainen, $virtanen, $hommo);
+    $players = array($grozer, $fromm, $schott, $bohme, $kampa, $zimmer, $kaliberda, $krick, $zenger);
 ?>

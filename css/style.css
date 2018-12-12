@@ -29,7 +29,7 @@ header {
   grid-template-areas: "logo nav nav";
   color: white;
   padding: 5px;
-  background-color: rgba(255, 165, 0, 0.7);
+  background-color: rgba(255, 150, 33, 0.87);
 }
 header nav {
   grid-area: nav;
@@ -52,7 +52,7 @@ section {
   width: auto;
   min-height: 650px;
   padding: 5px;
-  background-color: rgba(255, 165, 0, 0.7);
+  background-color: rgba(255, 150, 33, 0.87);
   text-align: center;
 }
 section .motto {
@@ -709,6 +709,23 @@ input {
 
   .images {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media screen and (min-width: 471px) {
+  @-webkit-keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  .fade-in {
+    opacity: 0;
+    -webkit-animation: fadeIn 0.5s ease-in 1 forwards;
+            animation: fadeIn 0.5s ease-in 1 forwards;
   }
 }
 @media screen and (max-width: 900px) {
