@@ -15,6 +15,7 @@ $eventType		= "";
 $location		= "";
 $time			= "";
 $errors  		= array(); 
+$messages		= array();
 
 // Including the emailing function. can't get it to work inside the functions file itself.  
 include "sendEmail.php";
@@ -27,7 +28,7 @@ if (isset($_POST['register_btn'])) {
 // User registration
 function register(){
 	// Calling the global variables to make them usable in this function.
-	global $db, $errors, $username, $email;
+	global $db, $errors, $messages, $username, $email;
 
 	// Take all variables from POST and escape them using the e() function descriped below.
 	// Password is generated using the generatePassword() function.
@@ -78,6 +79,7 @@ function register(){
 			$query = "INSERT INTO users (username, email, user_type, password, firstName, lastName, description) 
 					  VALUES('$username', '$email', '$user_type', '$password', '$firstname', '$lastname', '$description')";
 			mysqli_query($db, $query);
+			array_push($messages, "Käyttäjä luotu ja tiedot lähetetty sähköpostilla.");
 			header('location: index.php');
 		}
 	}
@@ -89,7 +91,7 @@ if (isset($_POST['deleteUser_btn'])) {
 }
 
 function deleteUser() {
-	global $db, $errors;
+	global $db, $errors, $messages;
 
 	$username = e($_POST['username']);
 	if($_SESSION['user']['username'] == $username) {
@@ -98,6 +100,7 @@ function deleteUser() {
 		$query = "DELETE FROM users WHERE username='$username'";
 		if (mysqli_query($db, $query)) {
 			array_push($errors, "DELETED"); 
+			array_push($messages, "Käyttäjä poistettu.");
 		} else {
 			echo "Error deleting record: " . mysqli_error($db);
 		}
@@ -124,14 +127,29 @@ function display_error() {
 	global $errors;
 
 	if (count($errors) > 0){
-		echo '<div class="error">';
-			foreach ($errors as $error){
-				echo $error .'<br>';
-			}
-		echo '</div>';
+		foreach ($errors as $error){
+			echo '<div class="error">';
+			echo '<i class="fa fa-times-circle"></i>';
+			echo $error .'<br>';
+			echo '</div>';
+		}
 	}
 }	
 
+function display_msg() {
+	global $messages;
+
+	if (count($messages) > 0){
+		
+		foreach ($messages as $message){
+			echo '<div class="msg">';
+			echo '<i class="fa fa-check"></i>';
+			echo $message .'<br>';
+			echo '</div>';
+		}
+		
+	}
+}	
 
 
 function isLoggedIn()
@@ -152,7 +170,7 @@ if (isset($_POST['login_btn'])) {
 
 // LOGIN USER
 function login(){
-	global $db, $username, $errors;
+	global $db, $username, $errors, $messages;
 
 	// grap form values
 	$username = e($_POST['username']);
@@ -178,8 +196,10 @@ function login(){
 			$logged_in_user = mysqli_fetch_assoc($results);
 			if ($logged_in_user['user_type'] == 'admin') {
 				$_SESSION['user'] = $logged_in_user;
+				array_push($messages, "Kirjauduttu sisään.");
 			}else{
 				$_SESSION['user'] = $logged_in_user;
+				array_push($messages, "Kirjauduttu sisään.");
 			}
 		}else {
 			array_push($errors, "Wrong username/password combination");
@@ -232,7 +252,7 @@ if (isset($_POST['reset_btn'])) {
 
 // Resets the password of the current user.
 function resetPassword() {
-	global $db, $username, $errors, $;
+	global $db, $username, $errors, $messages;
 
 	$oldPassword = e($_POST['oldPassword']);
 	$newPassword = e($_POST['newPassword']);
@@ -262,6 +282,7 @@ function resetPassword() {
 			$query = "UPDATE users SET password='$newPassword' WHERE username='$username'";
 			$updateQuery = mysqli_query($db, $query);
 			$_SESSION['user']['password'] = $newPassword;
+			array_push($messages, "Salasana vaihdettu uuteen.");
 		} else {
 			array_push($errors, "Wrong password");
 		}
@@ -274,7 +295,7 @@ if (isset($_POST['resetPassword_btn'])) {
 }
 
 function passwordReset() {
-	global $db, $errors;
+	global $db, $errors, $messages;
 
 	$email = e($_POST['email']);
 	$newPassword = generatePassword();
@@ -314,7 +335,7 @@ if (isset($_POST['createEvent_btn'])) {
 // Creates an event to the events database table.
 function createEvent(){
 	// Calling global variables to be used in this function.
-	global $db, $errors;
+	global $db, $errors, $messages;
 
 	// receive all input values from the form and escape them with the e() function.
 	$eventType    =  e($_POST['eventType']);
@@ -341,11 +362,12 @@ function createEvent(){
 		$query = "INSERT INTO events (eventType, description, location, time) 
 					VALUES('$eventType', '$description', '$location', '$time')";
 		mysqli_query($db, $query);				
+		array_push($messages, "Tapahtuma luotu");
 	}
 }
 
 function printEditEvent() {
-	global $db;
+	global $db, $messages;
 	$event_id = $_GET['event_id'];
 	$query = "SELECT * FROM events Where event_id=$event_id";
 	$result = mysqli_query($db, $query);
@@ -367,7 +389,10 @@ function printEditEvent() {
 	<div class="formBox">
 		<form method="post" action="../app/nimenhuuto/">
 
-		<?php echo display_error(); ?>
+		<?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
 
 			<div class="input-group">
 				<label for="eventType">Tapahtuma</label>
@@ -405,7 +430,7 @@ if(isset($_POST['editEvent_btn'])) {
 }
 
 function editEvent() {
-	global $db;
+	global $db, $messages;
 	$event_id = e($_POST['event_id']);
 	$eventType = e($_POST['eventType']);
 	$description = e($_POST['description']);
@@ -414,6 +439,7 @@ function editEvent() {
 
 	$editQuery = "UPDATE events SET eventType='$eventType', description='$description', location='$location', time='$time' WHERE event_id='$event_id'";
 	$result = mysqli_query($db, $editQuery);
+	array_push($messages, "Tapahtuma muokattu");
 }
 
 // Prints all the events from the database to a list.
@@ -682,7 +708,7 @@ if (isset($_POST['deleteEvent_btn'])) {
 }
 
 function deleteEvent($event_id = "") {
-	global $db;
+	global $db, $messages;
 
 	if(isset($_POST['event_id'])) {
 		$event_id = e($_POST['event_id']);
@@ -692,6 +718,7 @@ function deleteEvent($event_id = "") {
 	$result = mysqli_query($db, $deleteQuery);
 	$deleteQuery2 = "DELETE FROM attending WHERE event_id='$event_id'";
 	$result2 = mysqli_query($db, $deleteQuery2);
+	array_push($messages, "Tapahtuma poistettu");
 }
 
 // Generates a random password with a length of 8.

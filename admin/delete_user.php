@@ -14,7 +14,10 @@
 
         <form method="post" action="delete_user.php">
 
-        <?php echo display_error(); ?>
+        <?php 
+            echo display_error(); 
+            echo display_msg();
+        ?>
 
             <div class="formBox">
                 <div class="input-group">

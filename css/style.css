@@ -46,6 +46,7 @@ header img {
 }
 
 section {
+  width: auto;
   min-height: 650px;
   padding: 5px;
   background-color: rgba(255, 165, 0, 0.7);
@@ -53,6 +54,18 @@ section {
 }
 section .motto {
   font-size: 100px;
+}
+section .bodyContainer {
+  max-width: 1200px;
+  padding-left: 3%;
+  width: 100%;
+}
+section h1 {
+  margin: 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-bottom: 0px;
 }
 
 .gallery {
@@ -94,16 +107,22 @@ section .motto {
 }
 
 .players {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
   margin-top: 5px;
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .player {
   float: left;
   height: auto;
-  width: 40%;
+  width: 100%;
   text-align: left;
-  margin: 0 3% 0 3%;
+  margin: 0 3% 0 1%;
 }
 .player h1 {
   margin-top: 5px;
@@ -112,13 +131,32 @@ section .motto {
   max-width: 420px;
 }
 .player .imgwrapper img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
 }
 
-.intro {
-  margin: 10px;
+.stats {
+  margin-top: -10px;
+}
+
+.nonCentered {
   text-align: left;
+  margin-bottom: 3%;
+}
+
+.intro {
+  margin-left: 5px;
+  text-align: left;
+  max-width: 1100px;
+}
+
+.mediumH1 {
+  font-size: 60px;
+  margin-bottom: 1%;
+}
+
+p {
+  font-size: 2em;
 }
 
 aside {
@@ -190,11 +228,33 @@ label {
 }
 
 input {
-  width: 70%;
+  width: 100%;
 }
 
-.contact {
-  padding-top: 50px;
+.error, .msg {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 12px;
+  border-radius: 0.5em;
+  -webkit-box-shadow: 1px 1px 3px #888;
+          box-shadow: 1px 1px 3px #888;
+}
+.error i, .msg i {
+  margin: 10px 22px;
+  font-size: 2em;
+  vertical-align: middle;
+}
+
+.error {
+  color: #D8000C;
+  background-color: #FFD2D2;
+}
+
+.msg {
+  color: #4F8A10;
+  background-color: #DFF2BF;
 }
 
 .eventItem {
@@ -454,6 +514,7 @@ input {
 .topnav a {
   float: left;
   display: block;
+  border-radius: 0.5em;
   color: #f2f2f2;
   text-align: center;
   padding: 10px 11px;
@@ -476,8 +537,16 @@ input {
 }
 
 @media screen and (max-width: 700px) {
-  section .motto {
-    font-size: 60px;
+  .mediumH1 {
+    font-size: 35px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 20px;
   }
 
   .topnav a {
@@ -510,10 +579,6 @@ input {
     width: 100%;
   }
 
-  .container {
-    width: 100%;
-  }
-
   header {
     display: grid;
     width: 100%;
@@ -533,9 +598,41 @@ input {
   header img {
     height: 150px;
   }
+
+  section, .s1 {
+    padding: 5%;
+    width: 100%;
+  }
+  section .bodyContainer, .s1 .bodyContainer {
+    padding: 0;
+  }
+
+  section .motto {
+    font-size: 60px;
+  }
 }
 @media screen and (max-width: 765px) {
   .topnav a {
     font-size: 1.75em;
+  }
+}
+@media screen and (max-width: 980px) {
+  .players {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;
+    margin-top: 5px;
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .players .player {
+    float: none;
+    margin: auto;
+    text-align: center;
+  }
+  .players .player .imgwrapper {
+    margin: auto;
   }
 }
