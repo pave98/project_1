@@ -38,6 +38,8 @@ header
         a:hover
             background-color: #555
             color: white
+        a:active
+            background-color: #4CAF50 
     img 
         max-height: 200px
         width: auto
@@ -125,6 +127,33 @@ section
     font-size: 3.5em
     margin-left: 0em
     margin-bottom: 3px
+
+.deleteUserButton
+    width: 100%
+    background: transparent
+
+    border-radius: 6px
+    border: none
+    color: white
+    padding: 2px
+    text-align: center
+    display: inline-block
+    font-size: 16px
+    margin: 4px 2px
+    -webkit-transition-duration: 0.4s
+    transition-duration: 0.4s
+    cursor: pointer
+    text-decoration: none
+    text-transform: uppercase
+    color: black
+    border: 2px solid #FF0000
+.deleteUserButton:hover 
+    background-color: #FF0000
+    color: white
+
+.removeLink
+    text-decoration: none
+    color: inherit
 
 .mediumH1
     font-size: 5em
@@ -444,7 +473,7 @@ input
     display: none
 
 
-@media screen and (max-width: 700px) 
+@media screen and (max-width: 870px) 
 
     .mediumH1, .introH1
         font-size: 35px
@@ -497,6 +526,7 @@ input
     section .motto
         font-size: 60px
 
+
 @media screen and (max-width: 470px)
     .player
         margin-left: 0px
@@ -534,12 +564,11 @@ input
                 animation: fadeIn 0.5s ease-in 1 forwards
 
 
-
-
-@media screen and (max-width: 765px)
+@media screen and (max-width: 900px)
+  
     .topnav
         a
-            font-size: 1.75em
+            font-size: 1.5em
 @media screen and (max-width: 980px)
     .section
         width: 100%
