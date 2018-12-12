@@ -1,10 +1,11 @@
 <?php 
+// Start a session
 session_start();
 
 // Connection to database.
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
 
-// Declaring variables.
+// Declaring variables for the site.
 
 $root 			= $_SERVER['DOCUMENT_ROOT'];
 $username 	  	= "";
@@ -15,6 +16,8 @@ $description    = "";
 $eventType		= "";
 $location		= "";
 $time			= "";
+$news_title		= "";
+$news_article	= "";
 $errors  		= array(); 
 $messages		= array();
 
@@ -86,11 +89,12 @@ function register(){
 	}
 }
 
-
+// calls the deleteUser() function.
 if (isset($_POST['deleteUser_btn'])) {
 	deleteUser();
 }
 
+// After the deleteUserButton has been pressed, delete the user in question.
 function deleteUser() {
 	global $db, $errors, $messages;
 
@@ -123,6 +127,7 @@ function e($val){
 	return mysqli_real_escape_string($db, trim($val));
 }
 
+// Echoes all errors that have been stored in the errors array.
 function display_error() {
 	global $errors;
 
@@ -136,6 +141,7 @@ function display_error() {
 	}
 }	
 
+// Echoes all messages that have been stored in the messages array.
 function display_msg() {
 	global $messages;
 
@@ -151,7 +157,7 @@ function display_msg() {
 	}
 }	
 
-
+// Checks if current session has a logged in user.
 function isLoggedIn()
 {
 	if (isset($_SESSION['user'])) {
@@ -229,7 +235,7 @@ if (isset($_GET['logout'])) {
 }
 
 
-// Prints all the users from users database to a list.
+// Prints all the users from users database to a table.
 function printUsers() {
 	global $db;
 	$user_id = "";
@@ -320,6 +326,7 @@ if (isset($_POST['resetPassword_btn'])) {
 	passwordReset();
 }
 
+// if a user has forgotten his/her password and is not logged in, user gives a email and a new password is send via email to the given email.
 function passwordReset() {
 	global $db, $errors, $messages;
 
@@ -331,7 +338,6 @@ function passwordReset() {
 		array_push($errors, "An email address is required");
 	}
 
-	
 	if (count($errors) == 0) {
 		
 		$query = "SELECT * FROM users WHERE email='$email' LIMIT 1";
@@ -392,6 +398,7 @@ function createEvent(){
 	}
 }
 
+// prints the event editing pages content with the events details filled in the form.
 function printEditEvent() {
 	global $db, $messages;
 	$event_id = $_GET['event_id'];
@@ -450,11 +457,12 @@ function printEditEvent() {
 </section>
 EOF;
 }
-
+// Calls the editEvent() function.
 if(isset($_POST['editEvent_btn'])) {
 	editEvent();
 }
 
+// Edits an existing event with the new values given from the editEvent page.
 function editEvent() {
 	global $db, $messages;
 	$event_id = e($_POST['event_id']);
@@ -533,6 +541,7 @@ function printEvents() {
 	print "</div>";
 }
 
+// Counts days till the event. if the event has passed it gets deleted.
 function countDays($time, $event_id) {
 	$formatTime = strtotime($time);
 	$date1 = new DateTime(date("d-m-Y", $formatTime));
@@ -551,6 +560,7 @@ function countDays($time, $event_id) {
 	}
 }
 
+// Converts the english abbreviation to a finnish abbreviation for months. returns the month abbreviation and the day of the event.
 function getDayMonth($time = "") {
 	$month = date("M", $time);
 	switch($month) {
@@ -596,27 +606,158 @@ function getDayMonth($time = "") {
 	return array($month, $day);
 }
 
-function printOnlyEvents() {
+//Prints News to the frontpage.
+function printNews() {
 	global $db;
-    $query2="SELECT * FROM events";
-	$result = mysqli_query($db, $query2);
-	print "<div class='eventList'>";
-		print "<h1>Tapahtumat</h1>";
+    $query="SELECT * FROM news";
+	$result = mysqli_query($db, $query);
+	print "<div class='newsList'>";
+		print "<h1>Uutiset</h1>";
 		while($row = mysqli_fetch_assoc($result)) {
-			$event_id = $row['event_id'];
+			$news_id = $row['news_id'];
 			$num = 0;
-			print "<div class=eventItem>";
+			print "<div class=newsItem>";
 			foreach($row as $ding) {
-				
-				print "<div class=event".$num.">";
-				print "<p>".$ding."</p>";
-				print "</div>";
-				
+				if($num == 1) {
+					$time = strtotime($ding);
+					$formatTime = date("d/m/Y", $time);
+					print "<div class=news".$num.">";
+					print "<p>Luotu: ".$formatTime."</p>";
+					print "</div>";
+				} else {
+					print "<div class=news".$num.">";
+					print "<p>".$ding."</p>";
+					print "</div>";
+				}
 				$num++;
 			}
+			if(isAdmin()) {
+					printNewsButtons($news_id);
+				}
 			print "</div>";
 		}
 	print "</div>";
+}
+
+function printNewsButtons($news_id = "") {
+	print '
+		<a class="removeLink" href="../admin/editNews.php?news_id='.$news_id.'"><button class="editButton">Muokkaa tapahtumaa</button></a>	
+		<form action="index.php" method="post">
+			<input type="hidden" name="news_id" value="'.$news_id.'" />
+			<button class="deleteButton" type="submit" name="deleteNews_btn">Poista uutinen</button>
+		</form> 
+		
+	';
+}
+
+// prints the event editing pages content with the events details filled in the form.
+function printEditNews() {
+	global $db, $messages;
+	$news_id = $_GET['news_id'];
+	$query = "SELECT * FROM news Where news_id=$news_id";
+	$result = mysqli_query($db, $query);
+	$result = mysqli_fetch_assoc($result);
+	$news_title = $result['news_title'];
+	$news_article = $result['news_article'];
+
+	print <<<EOF
+	<section class="s1">
+	<div class="header">
+		<h2>Admin - Muokkaa uutista</h2>
+	</div>
+	<div class="formBox">
+		<form method="post" action="../app/index.php">
+
+		<?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
+
+			<div class="input-group">
+				<label for="news_title">Uutisen otsikko</label>
+				<input type="text" name="news_title" id="news_title" value="$news_title">
+			</div>
+			<div class="input-group">
+				<label for="news_article">Uutisen sisältö</label>
+				<textarea rows="4" cols="40" name="news_article" id="news_article" value="$news_article"></textarea>
+			</div>
+
+			<div class="input-group">
+				<input type="hidden" name="news_id" value="$news_id">
+				<button type="submit" class="btn formbutton" name="editNews_btn">Muokkaa uutista</button>
+			</div>
+		</form>
+	</div>
+	
+</section>
+EOF;
+}
+
+// Calls the editEvent() function.
+if(isset($_POST['editNews_btn'])) {
+	editNews();
+}
+
+// Edits an existing event with the new values given from the editEvent page.
+function editNews() {
+	global $db, $messages;
+	$news_id = e($_POST['news_id']);
+	$news_title = e($_POST['news_title']);
+	$news_article = e($_POST['news_article']);
+
+	$editQuery = "UPDATE news SET news_title='$news_title', news_article='$news_article' WHERE news_id='$news_id'";
+	$result = mysqli_query($db, $editQuery);
+	array_push($messages, "Uutinen muokattu");
+}
+
+// Calls the createNews() function.
+if (isset($_POST['createNews_btn'])) {
+	createNews();
+}
+
+// Creates an event to the news database table.
+function createNews(){
+	// Calling global variables to be used in this function.
+	global $db, $errors, $messages;
+
+	// receive all input values from the form and escape them with the e() function.
+	$news_title   =  e($_POST['news_title']);
+	$news_article =  e($_POST['news_article']);
+
+	// form validation: ensure that the form is correctly filled
+	if (empty($news_title)) { 
+		array_push($errors, "News title is required"); 
+	}
+	if (empty($news_article)) { 
+		array_push($errors, "news article is required"); 
+	}
+
+
+	// If no errors then adds the event to the table. 
+	if (count($errors) == 0) {
+		$query = "INSERT INTO news (news_title, news_article) 
+					VALUES('$news_title', '$news_article')";
+		mysqli_query($db, $query);				
+		array_push($messages, "Uutinen luotu");
+	}
+}
+
+
+// Calls the deleteNews() function.
+if (isset($_POST['deleteNews_btn'])) {
+	deleteNews();
+}
+
+function deleteNews($news_id = "") {
+	global $db, $messages;
+
+	if(isset($_POST['news_id'])) {
+		$news_id = e($_POST['news_id']);
+	}
+
+	$deleteQuery = "DELETE FROM news WHERE news_id='$news_id'";
+	$result = mysqli_query($db, $deleteQuery);
+	array_push($messages, "Uutinen poistettu");
 }
 
 function checkDecision($event_id="") {

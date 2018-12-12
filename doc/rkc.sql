@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 05, 2018 at 06:32 AM
+-- Generation Time: Dec 12, 2018 at 04:32 PM
 -- Server version: 5.7.21
--- PHP Version: 5.6.35
+-- PHP Version: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,14 +36,6 @@ CREATE TABLE IF NOT EXISTS `attending` (
   PRIMARY KEY (`event_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `attending`
---
-
-INSERT INTO `attending` (`event_id`, `user_id`, `decision`) VALUES
-(3, 7, 'imIn'),
-(3, 6, 'imOut');
-
 -- --------------------------------------------------------
 
 --
@@ -56,16 +48,24 @@ CREATE TABLE IF NOT EXISTS `events` (
   `eventType` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
-  `time` datetime(6) NOT NULL,
+  `time` datetime NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `events`
+-- Table structure for table `news`
 --
 
-INSERT INTO `events` (`event_id`, `eventType`, `description`, `location`, `time`) VALUES
-(3, 'treeni', 'Niko on GAY', 'Perse', '2018-11-23 11:44:00.000000');
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS `news` (
+  `news_id` int(255) NOT NULL AUTO_INCREMENT,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `news_title` varchar(255) NOT NULL,
+  `news_article` text NOT NULL,
+  PRIMARY KEY (`news_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -84,17 +84,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastName` varchar(50) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=123124 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `user_type`, `password`, `email`, `firstName`, `lastName`, `description`) VALUES
-(7, 'testi', 'user', '9627df7a4a5b849f67fce863e82adc71', 'testi@testi.testi', 'testi', 'testi', 'minÃ¤ olen testi'),
-(6, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com', 'admin', 'admin', 'admin'),
-(8, 'SAATANA', 'user', '99995eee3f56185f956b12b5973d6386', 'tuomensaloessi@gmail.com', 'Essi', 'Tuomensalo', 'ESSI ON SAATANA'),
-(9, 'pÃ¤Ã¤vÃ¶', 'admin', '9627df7a4a5b849f67fce863e82adc71', 'asdaskpdkaspdk@fmoafma.caas', 'pÃ¶rkkÃ¤', 'Perkele', 'Ã¤Ã¥Ã¶Ã¤Ã¥Ã¶Ã¤');
+(6, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com', 'admin', 'admin', 'admin');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
