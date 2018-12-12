@@ -80,14 +80,6 @@ section
     grid-template-columns: repeat(4, 1fr)
     grid-gap: 5px
 
-//fade in animation for gallery
-@keyframes fadeIn 
-    to
-        opacity: 1
-.fade-in
-    opacity: 0
-    animation: fadeIn 0.5s ease-in 1 forwards
-
 .teamheader
     margin: 5px 0
 
@@ -108,6 +100,7 @@ section
         margin-top: 5px
     margin: 0 3% 0 1% 
     .imgwrapper
+        margin-bottom: 0px
         max-width: 420px
         img 
             max-width: 100%
@@ -117,7 +110,9 @@ section
     
 
 .stats
-    margin-top: -10px
+    margin-top: 0px
+    width: auto
+    max-width: 90%
 
 .nonCentered
     margin-left: 0em
@@ -129,8 +124,10 @@ section
     float: left
 
 .introH1
-    font-size: 3.7em
+    font-size: 3.5em
     margin-left: 0em
+    margin-bottom: 3px
+
 .deleteUserButton
     width: 100%
     background: transparent
@@ -507,7 +504,7 @@ input
 
 @media screen and (max-width: 870px) 
 
-    .mediumH1
+    .mediumH1, .introH1
         font-size: 35px
     h1 
         font-size: 40px
@@ -558,11 +555,58 @@ input
     section .motto
         font-size: 60px
 
+
+@media screen and (max-width: 470px)
+    .player
+        margin-left: 0px
+        padding-left: 0px
+
+    p.stats    
+        max-width: 50%
+        margin-left: 0px
+        text-align: left
+        font-size: 1.5em
+    
+    h1.introH1
+        float: none
+        width: fit-content 
+        margin: auto
+        margin-left: 0px
+        margin-bottom: 3px
+    
+    h1.mediumH1
+        text-align: left
+
+    #current
+            display: none
+    
+    .images
+        grid-template-columns: repeat(1, 1fr)
+    
+    @media screen and (min-width: 471px)
+        //fade in animation for gallery
+            @keyframes fadeIn 
+                to
+                    opacity: 1
+            .fade-in
+                opacity: 0
+                animation: fadeIn 0.5s ease-in 1 forwards
+
+
 @media screen and (max-width: 900px)
+  
     .topnav
         a
             font-size: 1.5em
 @media screen and (max-width: 980px)
+    .section
+        width: 100%
+        margin: 0px
+    
+    h1.mediumH1 
+        text-align: center
+        font-size: 60px
+
     .players
         display: grid
         grid-template-columns: repeat(1,1fr)
@@ -571,8 +615,20 @@ input
         width: 100%
         height: fit-content
         .player
+            width: auto
             float: none
             margin: auto
             text-align: center
             .imgwrapper
                 margin: auto
+            img
+                width: 100%
+                margin: 0px 3px 0px 0px
+            p.stats    
+                font-size: 1.7em
+                max-width: 100%
+                margin-left: 0px
+                text-align: left
+    
+
+

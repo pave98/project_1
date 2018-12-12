@@ -2,13 +2,21 @@ const current = document.querySelector('#current');
 const images = document.querySelectorAll('.images img');
 const opacity = 0.5;
 
-//Set first #current image to have the opacity.
-images[0].style.opacity = 0.5;
+//Media query to see if the screen is not mobile so we would need the #current image
+var x = window.matchMedia("(min-width: 471px)")
+myFunction(x);
 
-images.forEach(img =>
-    img.addEventListener('click', imageClicked)
-    );
+//Set first #current image to have the opacity.
+function myFunction(x) {
+    if (x.matches){
+        images[0].style.opacity = 0.5;
+    images.forEach(img =>
+        img.addEventListener('click', imageClicked)
+        );
+    }
+}
 function imageClicked(e){
+
     //Reset opacity of images(to avoid setting all opacitys to faded).
     images.forEach(img => img.style.opacity = 1);
 
