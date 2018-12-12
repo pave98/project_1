@@ -8,7 +8,7 @@
 ?>
     <section class="s1">
         <div class="formBox">
-            <form method="post" action="../index.php">
+            <form method="post" action="">
 
                 <!-- Display validation errors here -->
 
