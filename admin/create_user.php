@@ -18,6 +18,14 @@
             ?>
 
                 <div class="input-group">
+                    <label for="user_type">Käyttäjätyyppi</label>
+                    <select name="user_type" id="user_type" >
+                        <option value=""></option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="input-group">
                     <label for="username">Käyttäjätunnus</label>
                     <input type="text" name="username" id="username" value="<?php echo $username; ?>" autofocus>
                 </div>
@@ -33,14 +41,7 @@
                     <label for="email">Sähköposti</label>
                     <input type="email" name="email" id="email" value="<?php echo $email; ?>">
                 </div>
-                <div class="input-group">
-                    <label for="user_type">Käyttäjätyyppi</label>
-                    <select name="user_type" id="user_type" >
-                        <option value=""></option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
-                </div>
+                
                 <div class="input-group">
                     <label for="desc">Kuvaus</label>
                     <input type="text" name="description" id="desc" value="<?php echo $description; ?>">
