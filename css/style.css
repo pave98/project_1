@@ -40,6 +40,9 @@ header nav a:hover {
   background-color: #555;
   color: white;
 }
+header nav a:active {
+  background-color: #4CAF50;
+}
 header img {
   max-height: 200px;
   width: auto;
@@ -69,7 +72,7 @@ section h1 {
 }
 
 .gallery {
-  max-width: 760px;
+  max-width: 1020px;
   margin: auto;
   border: white solid 3px;
   background: white;
@@ -140,19 +143,25 @@ section h1 {
 }
 
 .nonCentered {
-  text-align: left;
-  margin-bottom: 3%;
+  margin-left: 0em;
 }
 
 .intro {
   margin-left: 5px;
   text-align: left;
   max-width: 1100px;
+  float: left;
+}
+
+.introH1 {
+  font-size: 3.7em;
+  margin-left: 0em;
 }
 
 .mediumH1 {
-  font-size: 60px;
+  font-size: 5em;
   margin-bottom: 1%;
+  text-align: left;
 }
 
 p {

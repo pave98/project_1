@@ -3,7 +3,7 @@
     require "dir.php"
 ?>
     <section class="s1">
-    <h1>Galleria</h1>
+    <h1 class="mediumH1">Galleria</h1>
     <?php 
     $array = createArray();
     ?>

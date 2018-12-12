@@ -1,5 +1,8 @@
     <?php 
     include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/functions.php');
+
+    $loc2 = "";
+    echo $loc2;
     ?>
 <!DOCTYPE html>
 <html lang="en">
