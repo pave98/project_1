@@ -9,7 +9,7 @@
             echo display_msg();
             ?>
     <section class="s1">
-        <h1 class="motto">Yhdessä Runkulla Admin</h1>
+        <h1 class="motto">Admin</h1>
 
         
         <a class="removeLink" href="create_event.php"><button class="adminButton">Lisää tapahtuma</button></a>
