@@ -1,3 +1,4 @@
+/*This JS.file is what makes the gallery work and is responsive on load but not after it.*/
 const current = document.querySelector('#current');
 const images = document.querySelectorAll('.images img');
 const opacity = 0.5;

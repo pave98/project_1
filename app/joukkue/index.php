@@ -1,6 +1,9 @@
 <?php
     require "../header.php";
 ?>  
+<!--This page displays the background of the team and the players and their stats. The players are
+printed via an outside php.file called player.php. Note that all the names have been removed to
+protect the privacy of the players and replaced with players from the German National team.-->
     <section class="s1">
         <div class="bodyContainer">
         <h1 class="mediumH1 nonCentered">RKC-Volley</h1>

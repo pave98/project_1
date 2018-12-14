@@ -70,12 +70,14 @@
                 </a>
             </nav>
             <script>
+
                 function myFunction2() {
                     var xx = document.getElementById("myTopnav");
                     if (xx.className === "topnav") {
                         xx.className += " responsive";
                     } else {
                         xx.className = "topnav";
+
                     }
                 }
             </script>
