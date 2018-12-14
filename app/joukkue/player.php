@@ -1,4 +1,7 @@
 <?php 
+/*This is a simple class to create the player profiles for the 'team'-tab. Each player has their own object with
+stats. The problem with this approach is that new players can only be added by using the code same as deleting 
+some of the current ones. The client of this project happily said that this won't be a problem.*/
     class Player{
         private $number;
         private $fname;

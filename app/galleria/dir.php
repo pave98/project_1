@@ -1,4 +1,5 @@
 <?php 
+/*This file simply creates an array of the names of the images in the folder and returns it.*/
 function createArray(){
     $dir_path = 'C:/wamp64/www/project_1/app/images/uploads/';
     $array = array("");
