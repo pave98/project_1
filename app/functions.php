@@ -1,6 +1,5 @@
-<?php 
-include ('session_start.php');
-
+<?php session_start() ?>
+<?php
 
 // Connection to database.
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
@@ -71,7 +70,7 @@ function register(){
 		$checkSQL = mysqli_query($db, $sqlQuery);
 
 		if(mysqli_num_rows($checkSQL)) {
-			array_push($errors, "The username already exists!");
+			array_push($errors, "The username already exists or the email is already in use!");
 		} else {
 
 			// Sends the email to the user. Email contains their login data.
@@ -169,7 +168,7 @@ function isLoggedIn()
 
 
 
-// call the login() function if register_btn is clicked
+// call the login() function if login_btn is clicked
 if (isset($_POST['login_btn'])) {
 	login();
 }

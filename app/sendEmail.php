@@ -32,7 +32,7 @@
         $mail->isHTML(true);
 
         $mail->Subject = "RKC-sivun kirjautumistunnus";
-        $mail->Body = "<p>K&auml;ytt&auml;j&auml;tunnus: ".$username."</p><p>Salasana: ".$password."</p>";
+        $mail->Body = "<a href='www.nokkeli.fi'>nokkeli.fi</a><p>K&auml;ytt&auml;j&auml;tunnus: ".$username."</p><p>Salasana: ".$password."</p>";
         $mail->AltBody = "This is the plain text version of the email content";
 
         $mail->send();
