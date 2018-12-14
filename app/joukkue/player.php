@@ -59,7 +59,7 @@ some of the current ones. The client of this project happily said that this won'
             print'<h1 class="introH1"> #'.$this->getNumber().' '.$this->getLname().'</h1>';
         }
         function printPic(){
-            print"<div class='imgwrapper'><img src='http://localhost/project_1/app/images/grozersmol.jpg' alt='grözer'></div>";
+            print"<div class='imgwrapper'><img src='/project_1/app/images/grozersmol.jpg' alt='grözer'></div>";
         }
         function printStats(){
             print "<p class='stats'>";

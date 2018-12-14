@@ -69,7 +69,7 @@ section
 .gallery
     max-width: 1020px
     margin: auto
-    border: white solid 3px
+    padding: 3px
     background: white
 
 .main-img img, .images img
@@ -374,6 +374,32 @@ input
 .deleteButton:hover
     background-color: #FF0000
     color: white
+
+.adminButton
+    width: 46%
+    color: #00FF00
+    background: transparent
+    border: 2px solid #00FF00
+    border-radius: 6px
+    border: none
+    color: white
+    padding: 16px 19.5%
+    text-align: center
+    display: inline-block
+    font-size: 16px
+    margin: 4px 2px
+    -webkit-transition-duration: 0.4s
+    transition-duration: 0.4s
+    cursor: pointer
+    text-decoration: none
+    text-transform: uppercase
+    color: black
+    border: 2px solid #00FF00
+.adminButton:hover
+    background-color: #00FF00
+    color: white
+
+
 .event0 
     display: none
 .event1 
@@ -424,7 +450,7 @@ input
     grid-area: buttons
     form
         display: inline
-        float: center
+
 
 .editButton
     width: 45%
@@ -557,6 +583,8 @@ input
 
 
 @media screen and (max-width: 470px)
+    
+
     .player
         margin-left: 0px
         padding-left: 0px
@@ -602,7 +630,51 @@ input
 
 
 @media screen and (max-width: 900px)
-  
+    .eventButton
+        font-size: smaller
+
+    .adminButton
+            width: 46%
+            color: #00FF00
+            background: transparent
+            border: 2px solid #00FF00
+            border-radius: 6px
+            border: none
+            color: white
+            padding: 10px 5%
+            text-align: center
+            display: inline-block
+            font-size: 16px
+            margin: 4px 2px
+            -webkit-transition-duration: 0.4s
+            transition-duration: 0.4s
+            cursor: pointer
+            text-decoration: none
+            text-transform: uppercase
+            color: black
+            border: 2px solid #00FF00
+
+    .newsList
+        width: 80%
+        margin: auto
+        h1 
+            width: fit-content
+            margin: auto 0
+            font-size: 30px
+        .newsItem
+            text-align: left
+            .news0
+                display: none
+            .news1 p
+                font-size: 15px
+                margin-bottom: 5px
+            .news2 p
+                font-size: 25px
+                margin: 5px 0
+            .news3 p
+                font-size: 20px
+                line-height: 1.4
+                margin: 10px 0
     .topnav
         a
             font-size: 1.5em
