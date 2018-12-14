@@ -74,7 +74,7 @@ section h1 {
 .gallery {
   max-width: 1020px;
   margin: auto;
-  border: white solid 3px;
+  padding: 3px;
   background: white;
 }
 
@@ -536,7 +536,6 @@ input {
 }
 .buttons form {
   display: inline;
-  float: center;
 }
 
 .editButton {
