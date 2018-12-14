@@ -73,11 +73,11 @@
             </nav>
             <script>
                 function myFunction() {
-                    var x = document.getElementById("myTopnav");
-                    if (x.className === "topnav") {
-                        x.className += " responsive";
+                    var y = document.getElementById("myTopnav");
+                    if (y.className === "topnav") {
+                        y.className += " responsive";
                     } else {
-                        x.className = "topnav";
+                        y.className = "topnav";
                     }
                 }
             </script>
