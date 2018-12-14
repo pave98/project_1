@@ -62,9 +62,10 @@
                             ";
                     } else {
                         print "
-                            <a href=\"/project_1/app/index.php?logout='1'\">Kirjaudu ulos</a>
                             <a href='/project_1/app/passwordReset/'>Vaihda salasana</a>
-                            ";     
+                            <a href=\"/project_1/app/index.php?logout='1'\">Kirjaudu ulos</a>
+                            ";
+                            
                     }
                 ?>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
