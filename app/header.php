@@ -1,8 +1,5 @@
     <?php 
-    include($_SERVER['DOCUMENT_ROOT'].'/project_1/app/functions.php');
-
-    $loc2 = "";
-    echo $loc2;
+    include $_SERVER['DOCUMENT_ROOT'].'/project_1/app/functions.php';
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,17 +65,19 @@
                             
                     }
                 ?>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="javascript:void(0);" class="icon" onclick="myFunction2()">
                     <i class="fa fa-bars"></i>
                 </a>
             </nav>
             <script>
-                function myFunction() {
-                    var y = document.getElementById("myTopnav");
-                    if (y.className === "topnav") {
-                        y.className += " responsive";
+
+                function myFunction2() {
+                    var xx = document.getElementById("myTopnav");
+                    if (xx.className === "topnav") {
+                        xx.className += " responsive";
                     } else {
-                        y.className = "topnav";
+                        xx.className = "topnav";
+
                     }
                 }
             </script>
