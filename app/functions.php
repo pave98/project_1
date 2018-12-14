@@ -1,6 +1,6 @@
 <?php 
-// Start a session
-session_start();
+include ('session_start.php');
+
 
 // Connection to database.
 $db = mysqli_connect('localhost', 'admin', '', 'rkc');
