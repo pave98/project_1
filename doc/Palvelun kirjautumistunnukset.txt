@@ -1,0 +1,10 @@
+sivun osoite:
+www.nokkeli.fi
+
+Admin
+käyttäjätunnus: admin
+salasana:	admin
+
+Peruskäyttäjä
+käyttäjätunnus: testi
+salasana:	testi
