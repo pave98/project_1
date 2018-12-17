@@ -2,7 +2,7 @@
 <?php
 
 // Connection to database.
-$db = mysqli_connect('localhost', 'admin', '', 'rkc');
+$db = mysqli_connect('localhost', 'nokkelif_admin', 'mapatu959876731', 'nokkelif_rkc', '3306');
 
 // Declaring variables for the site.
 

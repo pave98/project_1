@@ -2,7 +2,11 @@
 /*This is a simple class to create the player profiles for the 'team'-tab. Each player has their own object with
 stats. The problem with this approach is that new players can only be added by using the code same as deleting 
 some of the current ones. The client of this project happily said that this won't be a problem.*/
+
+    
+    
     class Player{
+        private $id;
         private $number;
         private $fname;
         private $lname;
@@ -11,13 +15,17 @@ some of the current ones. The client of this project happily said that this won'
         private $position;
         private $funnyline;
         
-        function __construct($number, $fname, $lname, $height, $reach, $position){
+        function __construct($id, $number, $fname, $lname, $height, $reach, $position){
+            $this->setId($id);
             $this->setNumber($number);
             $this->setFname($fname);
             $this->setLname($lname);
             $this->setHeight($height);
             $this->setReach($reach);
             $this->setPosition($position);
+        }
+        function setId($id) {
+            $this->id = $id;
         }
         function setNumber($number){
             $this->number = $number;
@@ -33,6 +41,9 @@ some of the current ones. The client of this project happily said that this won'
         }
         function setLname($lname){
             $this->lname = $lname;
+        }
+        function getId() {
+            return $this->id;
         }
         function getLname(){
             return $this->lname;
@@ -55,13 +66,9 @@ some of the current ones. The client of this project happily said that this won'
         function getPosition(){
             return $this->position;
         }
-        function printHead(){
+        function printPlayer(){
             print'<h1 class="introH1"> #'.$this->getNumber().' '.$this->getLname().'</h1>';
-        }
-        function printPic(){
-            print"<div class='imgwrapper'><img src='/project_1/app/images/grozersmol.jpg' alt='grözer'></div>";
-        }
-        function printStats(){
+            print"<div class='imgwrapper'><img src='/project_1/app/images/players/".$this->id.".jpg' alt='player image'></div>";
             print "<p class='stats'>";
             print "Nimi: ".$this->getFname()." ".$this->getLname()."<br>";
             print "Pituus: ".$this->getHeight()."<br>";
@@ -71,15 +78,19 @@ some of the current ones. The client of this project happily said that this won'
             
         }
     }
-    $grozer = new Player("1", "Györg", "Grözer(C)", "183", "300", "Hakkuri/Yleispelaaja");
-    $fromm = new Player("2", "Christian", "Fromm", "180", "305", "Hakkuri/Yleispelaaja");
-    $schott = new Player("3", "Ruben", "Schott", "178", "285", "Yleispelaaja");
-    $bohme = new Player("7", "Marcus", "Böhme", "189", "307", "Keskitorjuja");
-    $kampa = new player("8", "Lukas", "Kampa", "175", "345", "Passari");
-    $zimmer = new Player("9", "Jan", "Zimmer(A)", "176", "350", "Passari");
-    $kaliberda = new Player("10", "Denys", "Kaliberda", "180", "300", "Yleispelaaja");
-    $krick = new Player("29", "Tobias", "Krick", "200", "305", "Keskitorjuja");
-    $zenger = new Player("32", "Julian", "Zenger", "174", "250", "Libero");
 
-    $players = array($grozer, $fromm, $schott, $bohme, $kampa, $zimmer, $kaliberda, $krick, $zenger);
+    include_once '../functions.php';
+    $players = array();
+    
+
+    $query = "SELECT * FROM players";
+    $result = mysqli_query($db, $query);
+    $num = 1;
+    while($row = mysqli_fetch_assoc($result)) {
+        
+        $player = new Player($row['player_id'], $row['player_number'], $row['player_fname'], $row['player_lname'], $row['height'], $row['reach'], $row['player_position']);
+        array_push($players, $player);
+        $num++;
+    }
+    
 ?>
