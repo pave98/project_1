@@ -674,6 +674,11 @@ input {
     width: 100%;
   }
 
+  .tablediv {
+    margin: 0 auto;
+    max-width: 80%;
+  }
+
   header {
     display: grid;
     width: 100%;
