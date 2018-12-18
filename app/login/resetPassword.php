@@ -4,11 +4,23 @@
         header('location: ../index.php');
     }
 ?>
+
+    <script type="text/javascript">
+        function validate() {
+            if( document.myForm.email.value == "" ) {
+            alert( "Anna Sähköpostisi!" );
+            document.myForm.email.focus() ;
+            return false;
+            }
+            return( true );
+        }
+    </script>
+
     <section class="s1">
         <h1>Unohtuiko salasana?</h1>
         <p>Kirjoita sähköpostisi saadaksesi uuden salasanan.</p>
         <div class="formBox">
-            <form method="post" action="index.php">
+            <form method="post" action="index.php" name="myForm" onsubmit = "return(validate());">
 
             <?php 
             echo display_error(); 

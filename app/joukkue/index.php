@@ -19,15 +19,12 @@ protect the privacy of the players and replaced with players from the German Nat
                     foreach($players as $value){
                         if(!($i % 2 === 0)){
                             print"<div class= 'player'>";
-                            $value->printHead();
-                            $value->printPic();
-                            $value->printStats();
+                            $value->printPlayer();
+
                             print"</div>";
                         }else{
                             print"<div class= 'player player2'>";
-                            $value->printHead();
-                            $value->printPic();
-                            $value->printStats();
+                            $value->printPlayer();
                             print"</div>";
                         }
                         $i++;

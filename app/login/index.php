@@ -4,12 +4,29 @@
         header('location: ../index.php');
     }
 ?>
+
+    <script type="text/javascript">
+        function validate() {
+            if( document.myForm.username.value == "" ) {
+            alert( "Anna käyttäjätunnuksesi!" );
+            document.myForm.username.focus() ;
+            return false;
+            }
+            if( document.myForm.password.value == "" ) {
+                alert( "Anna salasana!" );
+                document.myForm.password.focus() ;
+                return false;
+            }
+            return( true );
+        }
+    </script>
+
     <section class="s1">
         <div class="header">
             <h2>Login</h2>
         </div>
         <div class="formBox">
-            <form method="post" action="">
+            <form method="post" action="" name="myForm" onsubmit = "return(validate());">
                 <!-- Display validation errors here -->
                 <?php 
             echo display_error(); 

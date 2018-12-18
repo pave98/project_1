@@ -9,6 +9,10 @@ body {
   font-family: "Work Sans", sans-serif;
 }
 
+.tablediv {
+  overflow-x: auto;
+}
+
 .container {
   height: 100%;
   width: 100%;
@@ -627,111 +631,8 @@ input {
   margin: 10px 0;
 }
 
-@media screen and (max-width: 980px) {
-  .section {
-    width: 100%;
-    margin: 0px;
-  }
-
-  h1.mediumH1 {
-    text-align: center;
-    font-size: 50px;
-  }
-
-  .players {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 5px;
-    margin-top: 5px;
-    width: 100%;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-  }
-  .players .player {
-    width: auto;
-    float: none;
-    margin: auto;
-    text-align: center;
-  }
-  .players .player .imgwrapper {
-    margin: auto;
-  }
-  .players .player img {
-    width: 100%;
-    margin: 0px 3px 0px 0px;
-  }
-  .players .player p.stats {
-    font-size: 1.7em;
-    max-width: 100%;
-    margin-left: 0px;
-    text-align: left;
-  }
-}
-@media screen and (max-width: 900px) {
-  .eventButton {
-    font-size: smaller;
-  }
-
-  .adminButton {
-    width: 46%;
-    color: #00FF00;
-    background: transparent;
-    border: 2px solid #00FF00;
-    border-radius: 6px;
-    border: none;
-    color: white;
-    padding: 10px 5%;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: black;
-    border: 2px solid #00FF00;
-  }
-
-  .newsList {
-    width: 80%;
-    margin: auto;
-  }
-  .newsList h1 {
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
-    margin: auto 0;
-    font-size: 30px;
-  }
-  .newsList .newsItem {
-    text-align: left;
-  }
-  .newsList .newsItem .news0 {
-    display: none;
-  }
-  .newsList .newsItem .news1 p {
-    font-size: 15px;
-    margin-bottom: 5px;
-  }
-  .newsList .newsItem .news2 p {
-    font-size: 25px;
-    margin: 5px 0;
-  }
-  .newsList .newsItem .news3 p {
-    font-size: 20px;
-    line-height: 1.4;
-    margin: 10px 0;
-  }
-
-  .topnav a {
-    font-size: 1.5em;
-  }
-}
 @media screen and (max-width: 870px) {
-  h1.mediumH1, .introH1 {
+  .mediumH1, .introH1 {
     font-size: 35px;
   }
 
@@ -771,6 +672,11 @@ input {
   body {
     margin: 0;
     width: 100%;
+  }
+
+  .tablediv {
+    margin: 0 auto;
+    max-width: 80%;
   }
 
   header {
@@ -866,4 +772,106 @@ input {
             animation: fadeIn 0.5s ease-in 1 forwards;
   }
 }
+@media screen and (max-width: 900px) {
+  .eventButton {
+    font-size: smaller;
+  }
 
+  .adminButton {
+    width: 46%;
+    color: #00FF00;
+    background: transparent;
+    border: 2px solid #00FF00;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    padding: 10px 5%;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    border: 2px solid #00FF00;
+  }
+
+  .newsList {
+    width: 80%;
+    margin: auto;
+  }
+  .newsList h1 {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto 0;
+    font-size: 30px;
+  }
+  .newsList .newsItem {
+    text-align: left;
+  }
+  .newsList .newsItem .news0 {
+    display: none;
+  }
+  .newsList .newsItem .news1 p {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+  .newsList .newsItem .news2 p {
+    font-size: 25px;
+    margin: 5px 0;
+  }
+  .newsList .newsItem .news3 p {
+    font-size: 20px;
+    line-height: 1.4;
+    margin: 10px 0;
+  }
+
+  .topnav a {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 980px) {
+  .section {
+    width: 100%;
+    margin: 0px;
+  }
+
+  h1.mediumH1 {
+    text-align: center;
+    font-size: 60px;
+  }
+
+  .players {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;
+    margin-top: 5px;
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .players .player {
+    width: auto;
+    float: none;
+    margin: auto;
+    text-align: center;
+  }
+  .players .player .imgwrapper {
+    margin: auto;
+  }
+  .players .player img {
+    width: 100%;
+    margin: 0px 3px 0px 0px;
+  }
+  .players .player p.stats {
+    font-size: 1.7em;
+    max-width: 100%;
+    margin-left: 0px;
+    text-align: left;
+  }
+}

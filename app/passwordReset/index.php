@@ -6,9 +6,31 @@
         header('location: ../login/index.php');
     }
 ?>
+
+    <script type="text/javascript">
+        function validate() {
+            if( document.myForm.oldPassword.value == "" ) {
+            alert( "Anna vanha salasanasi!" );
+            document.myForm.oldPassword.focus() ;
+            return false;
+            }
+            if( document.myForm.newPassword.value == "" ) {
+                alert( "Anna uusi salasana!" );
+                document.myForm.newPassword.focus() ;
+                return false;
+            }
+            if( document.myForm.newPassword2.value == "" ) {
+                alert( "toista uusi salasana!" );
+                document.myForm.newPassword2.focus() ;
+                return false;
+            }
+            return( true );
+        }
+    </script>
+
     <section class="s1">
         <div class="formBox">
-            <form method="post" action="">
+            <form method="post" action="" name="myForm" onsubmit = "return(validate());">
 
                 <!-- Display validation errors here -->
 

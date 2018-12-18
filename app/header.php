@@ -2,7 +2,7 @@
     include $_SERVER['DOCUMENT_ROOT'].'/project_1/app/functions.php';
     ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

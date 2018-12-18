@@ -5,12 +5,55 @@
         header('location: ../app/login/index.php');
     }
 ?>
+
+    <script type="text/javascript">
+        function validate() {
+            if( document.myForm.user_type.value == "" ) {
+            alert( "Anna käyttäjän tyyppi!" );
+            document.myForm.user_type.focus() ;
+            return false;
+            }
+            if( document.myForm.username.value == "" ) {
+                alert( "Anna käyttäjätunnus!" );
+                document.myForm.username.focus() ;
+                return false;
+            }
+            if( document.myForm.firstname.value == "" ) {
+                alert( "Anna käyttäjän etunimi!" );
+                document.myForm.firstname.focus() ;
+                return false;
+            }
+            if( document.myForm.lastname.value == "" ) {
+                alert( "Anna käyttäjän sukunimi!" );
+                document.myForm.lastname.focus() ;
+                return false;
+            }
+            if( document.myForm.email.value == "" ) {
+                alert( "Anna käyttäjän sähköposti!" );
+                document.myForm.email.focus() ;
+                return false;
+            }
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.myForm.email.value)) {
+                alert( "Anna kunnollinen sähköposti!" );
+                document.myForm.email.focus() ;
+                return false;
+            }
+            if( document.myForm.description.value == "" ) {
+                alert( "Anna käyttäjän kuvaus!" );
+                document.myForm.description.focus() ;
+                return false;
+            }
+
+            return( true );
+        }
+    </script>
+
     <section class="s1">
         <div class="header">
             <h2>Admin - Luo Käyttäjä</h2>
         </div>
         <div class="formBox">
-            <form method="post" action="create_user.php">
+            <form method="post" action="create_user.php" name="myForm" onsubmit = "return(validate());">
 
             <?php 
             echo display_error(); 
