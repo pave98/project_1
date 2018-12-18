@@ -75,7 +75,6 @@ some of the current ones. The client of this project happily said that this won'
             print "Ulottuvuus: ".$this->getReach()."<br>";
             print "Pelipaikka: ".$this->getPosition()."<br>";
             print "</p>";
-            
         }
     }
 

@@ -26,10 +26,23 @@ said that this has a very slim chance of happening.-->
             </div>
         </div>
         <script src="/project_1/app/galleria/galleryjs.js"></script>
+
     <?php   
     if (isAdmin()) {
     ?>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+
+    <script type="text/javascript">
+        function validate() {
+            if( document.myForm.upload[].value == "" ) {
+            alert( "Anna ladattava kuva!" );
+            document.myForm.upload[].focus() ;
+            return false;
+            }
+            return( true );
+        }
+    </script>
+
+        <form action="upload.php" method="post" enctype="multipart/form-data" name="myForm" onsubmit = "return(validate());">
             Select image to upload: <input name="upload[]" type="file" multiple="multiple" />
             <input type="submit" value="Upload Image" name="submit">
         </form>

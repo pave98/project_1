@@ -17,6 +17,17 @@ $location		= "";
 $time			= "";
 $news_title		= "";
 $news_article	= "";
+$username		= "";
+$user_type 		= "";
+$email 			= "";
+$firstname 		= "";
+$lastname 		= "";
+$player_number	= "";
+$player_fname	= "";
+$player_lname	= "";
+$height			= "";
+$reach			= "";
+$player_position	= "";
 $errors  		= array(); 
 $messages		= array();
 
@@ -242,7 +253,9 @@ function printUsers() {
 	$result = mysqli_query($db, $query2);
 	print "<h2>Käyttäjälista</h2>";
 	print
-		"<table class='userList'>
+		"
+		<div class='tablediv'>
+		<table class='userList'>
 		<tr>
 			<th>Käyttäjätunnus</th>
 			<th>Käyttäjätyyppi</th>
@@ -264,13 +277,18 @@ function printUsers() {
 				
 			}
 			print <<<EOF
-			<td><form action="" method="post">
+			<td>
+			<form action="" method="post">
 			<input type="hidden" name="user_id" value="$user_id" />
-			<button class="deleteUserButton" type="submit" name="deleteUser_btn">Poista käyttäjä</button></form></td>
+			<button class="deleteUserButton" type="submit" name="deleteUser_btn">Poista käyttäjä</button></form>
+			<form action="editUser.php" method="post">
+			<input type="hidden" name="user_id" value="$user_id" />
+			<button class="deleteUserButton" type="submit" name="editUserPage_btn">Muokkaa käyttäjää</button></form>
+			</td>
 EOF;
 			print "</tr>";
 		}
-	print "</table>";
+	print "</table></div>";
 }
 
 // call resetPassword() function.
@@ -419,7 +437,7 @@ function printEditEvent() {
 		<h2>Admin - Muokkaa Tapahtumaa</h2>
 	</div>
 	<div class="formBox">
-		<form method="post" action="../app/nimenhuuto/">
+		<form method="post" action="../app/nimenhuuto/" name="myForm" onsubmit = "return(validate());">
 
 		<?php 
             echo display_error(); 
@@ -670,7 +688,7 @@ function printEditNews() {
 		<h2>Admin - Muokkaa uutista</h2>
 	</div>
 	<div class="formBox">
-		<form method="post" action="../app/index.php">
+		<form method="post" action="../app/index.php"  name="myForm" onsubmit = "return(validate());">
 
 		<?php 
             echo display_error(); 
@@ -902,4 +920,351 @@ function generatePassword() {
 function checkEventDate() {
 	$today = now();
 }
+
+if (isset($_POST['createPlayer_btn'])) {
+	createPlayer();
+}
+
+function createPlayer() {
+	global $db, $errors, $messages;
+
+	$player_number		= e($_POST['player_number']);
+	$player_fname		= e($_POST['player_fname']);
+	$player_lname		= e($_POST['player_lname']);
+	$height				= e($_POST['height']);
+	$reach				= e($_POST['reach']);
+	$player_position	= e($_POST['player_position']);
+	// Form validation.
+	if (empty($player_number)) { 
+		array_push($errors, "Player number is required"); 
+	}
+	if (empty($player_fname)) { 
+		array_push($errors, "First name is required"); 
+	}
+	if (empty($player_lname)) { 
+		array_push($errors, "Last name is required"); 
+	}
+    if(empty($height)) {
+        array_push($errors, "Player's height is required"); // 
+    }
+    if(empty($reach)) {
+        array_push($errors, "Player's reach is required"); // 
+    }
+    if(empty($player_position)) {
+        array_push($errors, "Position is required"); 
+	}
+	
+	if(count($errors) == 0 ) {
+		$sqlQuery = "SELECT * FROM players WHERE player_number='$player_number'";
+		$checkSQL = mysqli_query($db, $sqlQuery);
+		if(mysqli_num_rows($checkSQL)) {
+			array_push($errors, "There is already a player with that number!!!");
+		} else {
+			$query = "INSERT INTO players (player_number, player_fname, player_lname, height, reach, player_position) 
+					  VALUES('$player_number', '$player_fname', '$player_lname', '$height', '$reach', '$player_position')";
+			mysqli_query($db, $query);
+
+			uploadPlayerPhoto($player_number);
+		}
+	}
+}
+
+
+function uploadPlayerPhoto($player_number = "") {
+	global $db, $errors, $messages;
+	$query = "SELECT player_id FROM players WHERE player_number='$player_number' LIMIT 1";
+	$result = mysqli_query($db, $query);
+	$value = mysqli_fetch_assoc($result);
+	$filename = $value['player_id'].".";
+	
+	$file = $_FILES['player_image']['name'];
+	$file2 = strtolower($file) ; 
+	$exts = explode(".", $file) ; 
+	$n = count($exts)-1; 
+	$exts = $exts[$n]; 
+
+	$target_dir = $_SERVER['DOCUMENT_ROOT']."/project_1/app/images/players/";
+	$target_file = $target_dir . $filename.$exts;
+	if(file_exists($target_file)) {
+		$delete = $target_file;
+		unlink($delete);
+	}
+	$uploadOk = 1;
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	echo $_FILES["player_image"]["tmp_name"];
+	$check = getimagesize($_FILES["player_image"]["tmp_name"]);
+    if($check !== false) {
+        array_push($messages, "File is an image - " . $check["mime"] . ".");
+        $uploadOk = 1;
+    } else {
+		array_push($errors, "File is not an image.");
+        $uploadOk = 0;
+	}
+	if (file_exists($target_file)) {
+		array_push($errors, "Sorry, file already exists.");
+		$uploadOk = 0;
+	}
+	if ($_FILES["player_image"]["size"] > 500000) {
+		array_push($errors, "Sorry, your file is too large.");
+		$uploadOk = 0;
+	}
+	if($imageFileType != "jpg") {
+		array_push($errors, "Sorry, only JPG files are allowed.");
+	$uploadOk = 0;
+	}
+	if ($uploadOk == 0) {
+		array_push($errors, "Sorry, your file was not uploaded.");
+	} else {
+		if (move_uploaded_file($_FILES["player_image"]["tmp_name"], $target_file)) {
+			array_push($messages, "The file ". basename( $_FILES["player_image"]["name"]). " has been uploaded.");
+		} else {
+			array_push($errors, "Sorry, there was an error uploading your file.");
+		}
+	}
+}
+
+
+function printEditPlayer() {
+	global $db, $messages;
+	$player_id = $_POST['player_id'];
+	$query = "SELECT * FROM players Where player_id=$player_id";
+	$result = mysqli_query($db, $query);
+	$result = mysqli_fetch_assoc($result);
+
+	$player_number = $result['player_number'];
+	$player_fname = $result['player_fname'];
+	$player_lname = $result['player_lname'];
+	$height = $result['height'];
+	$reach = $result['reach'];
+	$player_position = $result['player_position'];
+
+	print <<<EOF
+	<section class="s1">
+	<div class="header">
+		<h2>Admin - Muokkaa Pelaajaa</h2>
+	</div>
+	<div class="formBox">
+		<form method="post" action="" enctype ="multipart/form-data" name="myForm" onsubmit = "return(validate());">
+
+		<?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
+
+			<div class="input-group">
+				<label for="player_number">Pelaajan numero</label>
+				<input type="text" name="player_number" id="player_number" value="$player_number" autofocus>
+			</div>
+			<div class="input-group">
+				<label for="player_fname">Pelaajan etunimi</label>
+				<input type="text" name="player_fname" id="player_fname" value="$player_fname">
+			</div>
+			<div class="input-group">
+				<label for="player_lname">Pelaajan sukunimi</label>
+				<input type="text" name="player_lname" id="player_lname" value="$player_lname">
+			</div>
+			<div class="input-group">
+				<label for="height">Pelaajan korkeus</label>
+				<input type="text" name="height" id="height" value="$height">
+			</div>
+			<div class="input-group">
+				<label for="reach">Pelaajan Ulottuvuus</label>
+				<input type="text" name="reach" id="reach" value="$reach">
+			</div>
+			<div class="input-group">
+				<label for="player_position">Pelaajan pelipaikka</label>
+				<input type="text" name="player_position" id="player_position" value="$player_position">
+			</div>
+			<div class="input-group">
+				<label for="player_image">Pelaajan kuva</label>
+				<input type="file" name="player_image" id="player_image">
+			</div>
+			<div class="input-group">
+				<input type="hidden" name="player_id" value="$player_id">
+				<button type="submit" class="btn formbutton" name="editPlayer_btn">Muokkaa pelaajaa</button>
+			</div>
+		</form>
+	</div>
+	
+</section>
+EOF;
+}
+
+if(isset($_POST['editPlayer_btn'])) {
+	editPlayer();
+}
+
+// Edits an existing event with the new values given from the editEvent page.
+function editPlayer() {
+	global $db, $messages;
+	$player_id = e($_POST['player_id']);
+	$player_number = e($_POST['player_number']);
+	$player_fname = e($_POST['player_fname']);
+	$player_lname = e($_POST['player_lname']);
+	$height = e($_POST['height']);
+	$reach = e($_POST['reach']);
+	$player_position = e($_POST['player_position']);
+
+	$editQuery = "UPDATE players SET player_number='$player_number', player_fname='$player_fname', player_lname='$player_lname', height='$height', reach='$reach', player_position='$player_position' WHERE player_id='$player_id'";
+	$result = mysqli_query($db, $editQuery);
+	if(is_uploaded_file($_FILES['player_image']['tmp_name'])) {
+		echo $_FILES['player_image']['tmp_name'];
+		uploadPlayerPhoto($player_number);
+	}
+	array_push($messages, "Pelaaja muokattu");
+}
+
+
+function printPlayers() {
+	global $db;
+	$player_id = "";
+    $query2="SELECT * FROM players";
+	$result = mysqli_query($db, $query2);
+	print "<h2>Käyttäjälista</h2>";
+	print
+		"
+		<div class='tablediv'>
+		<table class='userList'>
+		<tr>
+			<th>#</th>
+			<th>Etunimi</th>
+			<th>Sukunimi</th>
+			<th>Pituus</th>
+			<th>Ulottuvuus</th>
+			<th>Pelipaikka</th>
+		</tr>	
+		";
+		while($row = mysqli_fetch_row($result)){
+			$player_id = $row[0];
+			$check = true;
+			print "<tr>";
+			foreach($row as $value) {
+				if(!$check) {
+					print "<td>".$value."</td>";
+				} else {
+					$check = false;
+				}
+			}
+			print <<<EOF
+			<td>
+			<form action="" method="post">
+			<input type="hidden" name="player_id" value="$player_id" />
+			<button class="deleteUserButton" type="submit" name="deletePlayer_btn">Poista Pelaaja</button></form>
+			<form action="editPlayer.php" method="post">
+			<input type="hidden" name="player_id" value="$player_id" />
+			<button class="deleteUserButton" type="submit" name="editPlayerPage_btn">Muokkaa pelaajaa</button></form>
+			</td>
+EOF;
+			print "</tr>";
+		}
+	print "</table></div>";
+}
+
+if (isset($_POST['deletePlayer_btn'])) {
+	deletePlayer();
+}
+
+
+function deletePlayer() {
+	global $db, $errors, $messages;
+
+	$player_id = e($_POST['player_id']);
+	
+	$filename = $player_id.".jpg";
+	
+	$target_dir = $_SERVER['DOCUMENT_ROOT']."/project_1/app/images/players/";
+	$target_file = $target_dir . $filename;
+	if(file_exists($target_file)) {
+		$delete = $target_file;
+		unlink($delete);
+	}
+
+	$query = "DELETE FROM players WHERE player_id='$player_id'";
+	if (mysqli_query($db, $query)) {
+		array_push($messages, "Pelaaja poistettu.");
+	} else {
+		echo "Error deleting record: " . mysqli_error($db);
+	}
+
+}
+
+function printEditUser() {
+	global $db, $messages;
+	$user_id = $_POST['user_id'];
+	$query = "SELECT * FROM users Where user_id=$user_id";
+	$result = mysqli_query($db, $query);
+	$result = mysqli_fetch_assoc($result);
+
+	$username = $result['username'];
+	$user_type = $result['user_type'];
+	$email = $result['email'];
+	$firstname = $result['firstName'];
+	$lastname = $result['lastName'];
+
+	print <<<EOF
+	<section class="s1">
+	<div class="header">
+		<h2>Admin - Muokkaa käyttäjää</h2>
+	</div>
+	<div class="formBox">
+		<form method="post" action="index.php" name="myForm" onsubmit = "return(validate());">
+
+		<?php 
+            echo display_error(); 
+            echo display_msg();
+            ?>
+
+			<div class="input-group">
+                    <label for="user_type">Käyttäjätyyppi</label>
+                    <select name="user_type" id="user_type" >
+                        <option value="$user_type">$user_type</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="username">Käyttäjätunnus</label>
+                    <input type="text" name="username" id="username" value="$username" autofocus>
+                </div>
+                <div class="input-group">
+                    <label for="firstname">Etunimi</label>
+                    <input type="text" name="firstname" id="firstname" value="$firstname">
+                </div>
+                <div class="input-group">
+                    <label for="lastname">Sukunimi</label>
+                    <input type="text" name="lastname" id="lastname" value="$lastname">
+                </div>
+                <div class="input-group">
+                    <label for="email">Sähköposti</label>
+                    <input type="email" name="email" id="email" value="$email">
+                </div>
+				<div class="input-group">
+					<input type="hidden" name="user_id" value="$user_id">
+                    <button type="submit" class="btn formbutton" name="editUser_btn">Muokkaa käyttäjää</button>
+                </div>
+		</form>
+	</div>
+	
+</section>
+EOF;
+}
+
+if(isset($_POST['editUser_btn'])) {
+	editUser();
+}
+
+function editUser() {
+	global $db, $messages;
+	$user_id = e($_POST['user_id']);
+	$username = e($_POST['username']);
+	$user_type = e($_POST['user_type']);
+	$email = e($_POST['email']);
+	$firstname = e($_POST['firstname']);
+	$lastname = e($_POST['lastname']);
+
+	$editQuery = "UPDATE users SET username='$username', user_type='$user_type', email='$email', firstName='$firstname', lastName='$lastname' WHERE user_id='$user_id'";
+	$result = mysqli_query($db, $editQuery);
+	array_push($messages, "Käyttäjä muokattu");
+}
+
 ?>

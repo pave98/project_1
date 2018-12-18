@@ -5,12 +5,29 @@
         header('location: ../app/login/index.php');
     }
 ?>
+
+    <script type="text/javascript">
+        function validate() {
+            if( document.myForm.news_title.value == "" ) {
+            alert( "Anna uutisen otsikko!" );
+            document.myForm.news_title.focus() ;
+            return false;
+            }
+            if( document.myForm.news_article.value == "" ) {
+                alert( "Anna uutisen sisältö!" );
+                document.myForm.news_article.focus() ;
+                return false;
+            }
+            return( true );
+        }
+    </script>
+
     <section class="s1">
         <div class="header">
             <h2>Admin - Luo Uutinen</h2>
         </div>
         <div class="formBox">
-            <form method="post" action="create_news.php">
+            <form method="post" name="myForm" action="create_news.php" onsubmit = "return(validate());">
 
             <?php 
             echo display_error(); 

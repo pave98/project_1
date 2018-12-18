@@ -5,9 +5,12 @@
         header('location: ../app/login/index.php');
     }
 ?>
+
+
+
     <section class="s1">
         <div class="header">
-            <h2>Admin - Edit users</h2>
+            <h2>Admin - Edit Players</h2>
         </div>
         
         <?php 
@@ -16,7 +19,7 @@
         ?>
         
         <div>
-            <?php printUsers() ?>
+            <?php printPlayers() ?>
         </div>
         
         
